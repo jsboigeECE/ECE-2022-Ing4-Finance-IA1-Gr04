@@ -97,7 +97,7 @@ namespace Sudoku.Shared
             // see what the installer is doing
 
             Installer.LogMessage += Console.WriteLine;
-
+            Installer.InstallPath = Environment.CurrentDirectory;
             //
             // install from the given source
             Python.Deployment.Installer.SetupPython().Wait();
