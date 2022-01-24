@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Sudoku
 {
     public partial class Form1 : Form
@@ -38,7 +39,7 @@ namespace Sudoku
         {
 
             transcript();
-           
+            Case c=new Case()
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

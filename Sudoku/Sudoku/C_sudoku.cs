@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 public class Case
     {
         public int m
@@ -10,7 +11,7 @@ public class Case
 
         public Case(int x, int y){
 
-    this.x = x
+            this.x = x
             this.y = y
             v = 0
 
