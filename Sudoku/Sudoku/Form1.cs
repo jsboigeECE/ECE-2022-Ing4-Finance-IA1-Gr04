@@ -13,10 +13,11 @@ namespace Sudoku
 {
     public partial class Form1 : Form
     {
-  
+        C_Sudoku game = new C_Sudoku();
         public Form1()
         {
             InitializeComponent();
+            
           
         }
 
@@ -40,12 +41,24 @@ namespace Sudoku
 
             int[] result = transcript();
 
-
             // Manon et Amani
+            result[0] = 0;
+
+            for (int j = 0; j < 9; j++)
+            {
+                Console.WriteLine(result[j]);
+            }
+
+            result = game.greedyColoring(result);
 
 
+            for (int j = 0; j < 9; j++)
+            {
+                Console.WriteLine(result[j]);
+            }
 
-            reverseTranscript(result);
+
+                reverseTranscript(result);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
