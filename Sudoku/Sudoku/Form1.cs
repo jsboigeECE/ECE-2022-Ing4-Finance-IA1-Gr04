@@ -37,26 +37,7 @@ namespace Sudoku
         private void button1_Click(object sender, EventArgs e)
         {
 
-            Point p = new Point(40, 49);
-            Control it = groupBox1.GetChildAtPoint(p);
-            int[] tab = new int[81];
-
-            for (int i = 0; i < 81; i++)
-            {
-                if ( (it.Text == "1") || (it.Text == "2") || (it.Text == "3") || (it.Text == "4") || (it.Text == "5") || (it.Text == "6") || (it.Text == "7") || (it.Text == "8") || (it.Text == "9"))
-                {
-                    tab[i] = int.Parse(it.Text);
-                }else {
-                    tab[i] = 0;
-                }
-                it = groupBox1.GetNextControl(it, true);
-                
-            }
-
-            for (int j = 0; j < 81; j++)
-            {
-                Console.WriteLine(tab[j]);
-            }
+            transcript();
            
         }
 
@@ -69,11 +50,37 @@ namespace Sudoku
         {
             
         }
+
+
+        private int[] transcript()
+        {
+
+            Point p = new Point(40, 49);
+            Control it = groupBox1.GetChildAtPoint(p);
+            int[] tab = new int[81];
+
+            for (int i = 0; i < 81; i++)
+            {
+                if ((it.Text == "1") || (it.Text == "2") || (it.Text == "3") || (it.Text == "4") || (it.Text == "5") || (it.Text == "6") || (it.Text == "7") || (it.Text == "8") || (it.Text == "9"))
+                {
+                    tab[i] = int.Parse(it.Text);
+                }
+                else
+                {
+                    tab[i] = 0;
+                }
+                it = groupBox1.GetNextControl(it, true);
+
+            }
+
+            for (int j = 0; j < 81; j++)
+            {
+                Console.WriteLine(tab[j]);
+            }
+            return new int[2];
+        }
+
     }
 
-     public static int[] Transcript()
-    {
-
-        return new int[2];
-    }
+ 
 }
