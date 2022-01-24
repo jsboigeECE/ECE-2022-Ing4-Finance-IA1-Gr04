@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using C_sudoku.cs;
 
 namespace Sudoku
 {
@@ -38,8 +38,8 @@ namespace Sudoku
         private void button1_Click(object sender, EventArgs e)
         {
 
-            transcript();
-            Case c=new Case()
+            int tab1 = transcript();
+      
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -68,17 +68,13 @@ namespace Sudoku
                 }
                 else
                 {
-                    tab[i] = 0;
+                    tab[i] = -1;
                 }
                 it = groupBox1.GetNextControl(it, true);
 
             }
 
-            for (int j = 0; j < 81; j++)
-            {
-                Console.WriteLine(tab[j]);
-            }
-            return new int[2];
+            return tab;
         }
 
     }
