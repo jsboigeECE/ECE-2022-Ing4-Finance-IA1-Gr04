@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sudoku.LaNorvigSolveur\Sudoku.LaNorvigSolveur.csproj" />
     <ProjectReference Include="..\Sudoku.PSOSolvers\Sudoku.PSOSolvers.csproj" />
     <ProjectReference Include="..\Sudoku.NeuralSolvers\Sudoku.NeuralSolvers.csproj" />
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
