@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using C_sudoku.cs;
+
 
 namespace Sudoku
 {
@@ -38,8 +38,14 @@ namespace Sudoku
         private void button1_Click(object sender, EventArgs e)
         {
 
-            int tab1 = transcript();
-      
+            int[] result = transcript();
+
+
+            // Manon et Amani
+
+
+
+            reverseTranscript(result);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -75,6 +81,23 @@ namespace Sudoku
             }
 
             return tab;
+        }
+
+
+        private void reverseTranscript(int[]tab)
+        {
+
+            Point p = new Point(40, 49);
+            Control it = groupBox1.GetChildAtPoint(p);
+    
+
+            for (int i = 0; i < 81; i++)
+            {
+                it.Text = tab[i].ToString();
+
+            }
+
+           
         }
 
     }
