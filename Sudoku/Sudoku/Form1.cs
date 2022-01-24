@@ -70,4 +70,10 @@ namespace Sudoku
             
         }
     }
+
+     public static int[] Transcript()
+    {
+
+        return new int[2];
+    }
 }
