@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 
 public class Case
 {
@@ -15,7 +16,7 @@ public class Case
 
         this.x = x;
         this.y = y;
-        v = 0;
+        v = -1;
 
         if (x < 3 && y < 3) m = 0;
         else if (x < 6 && y < 3) m = 1;
@@ -207,24 +208,34 @@ public class C_Sudoku
                 j++;
             }
 
+            if (result[i] != -1)
+            {
+                s[i % 9, j].setV(result[i]);
+            }
 
-
-            if (result[i] != -1) { 
-            s[i % 9, j].setV(result[i]);
- 
-
-             }
         }
     }
 
     public void display()
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                Console.WriteLine(s[j, i].getV());
+            }
+        }
+    }
+
+
+    public void reset()
     {
 
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
             {
-                Console.WriteLine(s[j, i].getV());
+                s[j, i].setV(0);
             }
         }
     }
@@ -235,14 +246,16 @@ public class C_Sudoku
         // A temporary array to store the available colors. True
         // value of available[cr] would mean that the color cr is
         // assigned to one of its adjacent vertices
+
         bool[] available = StoreColors();
 
-        
+        s[0, 0].setV(0);
 
         // Assign colors to remaining V-1 vertices
-        //result = AsignColors(result, available);
-        AsignColors2();
+        result = AsignColors(result, available);
 
+        this.fill_sudoku(result);
+/*
         int j = -1;
 
         for (int i = 0; i < 81; i++)
@@ -254,7 +267,7 @@ public class C_Sudoku
             result[i] = s[i % 9, j].getV();
 
         }
-
+*/
             return result;
     }
 
@@ -270,23 +283,28 @@ public class C_Sudoku
                 j++;
             }
 
-            // Process all adjacent vertices and flag their colors
-            // as unavailable
-            IEnumerator<Case> it = s[u % 9, j].GetEnum();
+            if (s[u % 9, j].getV() == 0)
+            {
+                // Process all adjacent vertices and flag their colors
+                // as unavailable
+                IEnumerator<Case> it = s[u % 9, j].GetEnum();
                 while (it.MoveNext())
                 {
                     int i = it.Current.getV();
-                    
-                    if (result[i] != -1 && result[i]<9)
+
+                    if (i>=0) 
                     {
-                      available[result[i]] = true;
+                        if (result[i] != -1 && result[i] < 9)
+                        {
+                            available[result[i]] = true;
+                        }
                     }
-                    
+
                 }
 
                 // Find the first available color
                 int cr;
-                for (cr = 0; cr < 9; cr++)
+                for (cr = 0; cr < 8; cr++)
                 {
                     if (available[cr] == false)
                     {
@@ -295,21 +313,24 @@ public class C_Sudoku
                 }
 
                 result[u] = cr; // Assign the found color
-
+                this.fill_sudoku(result);
                 // Reset the values back to false for the next iteration
                 it = s[u % 9, j].GetEnum();
                 while (it.MoveNext())
                 {
                     int i = it.Current.getV();
-                    
-                    if (result[i] != -1 && result[i] < 9)
+
+                    if (i >= 0)
                     {
-                         
-                        available[result[i]] = false;
+                        if (result[i] != -1 && result[i] < 9)
+                        {
+
+                            available[result[i]] = false;
+                        }
                     }
-                    
+
                 }
-            
+            }
         }
         return result;
     }
@@ -333,26 +354,42 @@ public class C_Sudoku
     }
 
 
-    private void AsignColors2()
+    private void AsignColors2(int[] result,int x,int y)
     {
 
-
-            for (int clr = 1; clr < 10; clr++)
-            {
-                for (int j = 0; j < 9; j++)
+                for (int clr = 1; clr < 10; clr++)
                 {
-                    for (int i = 0; i < 9; i++)
+
+                    for (int j = y; j < 9; j++)
                     {
-
-                        if ((s[i, j].getV() != clr) && (s[i, j].verif_coloradj(clr) == false) && (s[i, j].getV() ==0))
+                        for (int i = x; i < 9; i++)
                         {
-                            s[i, j].setV(clr);
-                        }
-                    }
 
+                            if ((s[i, j].getV() != clr) && (s[i, j].verif_coloradj(clr) == false) && (s[i, j].getV() == 0))
+                            {
+                                s[i, j].setV(clr);
+                            }
+                        }
+
+                    }
+                    
+                    for (int j = 0; j < y; j++)
+                    {
+                        for (int i = 0; i < x; i++)
+                        {
+
+                            if ((s[i, j].getV() != clr) && (s[i, j].verif_coloradj(clr) == false) && (s[i, j].getV() == 0))
+                            {
+                                s[i, j].setV(clr);
+                            }
+                        }
+
+                    }
+                    
                 }
-            }
-        
+         
+
+
     }
 
             private bool[] StoreColors()

@@ -46,6 +46,7 @@ namespace Sudoku
 
             game.fill_sudoku(result);
             // game.display();
+
             result = game.greedyColoring(result);
 /*
             for (int i = 0; i < 81; i++)
@@ -54,7 +55,7 @@ namespace Sudoku
             }
 
 */
-            game.fill_sudoku(result);
+            //game.fill_sudoku(result);
             //game.display_matrice_adj();
             reverseTranscript(result);
         }
@@ -115,6 +116,10 @@ namespace Sudoku
             
         }
 
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
  
