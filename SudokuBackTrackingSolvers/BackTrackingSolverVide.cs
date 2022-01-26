@@ -121,7 +121,9 @@ namespace SudokuBackTrackingSolvers
 
         GridSudoku ISolverSudoku.Solve(GridSudoku s)
         {
-			return s;
+            Solve(s);
+            return s;
+
         }
     }
 }
