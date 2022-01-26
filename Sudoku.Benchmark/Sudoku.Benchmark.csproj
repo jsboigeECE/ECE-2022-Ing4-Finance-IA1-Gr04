@@ -17,6 +17,7 @@
     <ProjectReference Include="..\Sudoku.Z3Solvers\Sudoku.Z3Solvers.csproj" />
     <ProjectReference Include="..\Sudoku.PSOSolvers\Sudoku.PSOSolvers.csproj" />
     <ProjectReference Include="..\Sudoku.CSPSolvers\Sudoku.CSPSolvers.csproj" />
+    <ProjectReference Include="..\SudokuBackTrackingSolvers\SudokuBackTrackingSolvers.csproj" />
   </ItemGroup>
 
 </Project>
