@@ -41,24 +41,22 @@ namespace Sudoku
 
             int[] result = transcript();
 
-            // Manon et Amani
+    
             result[0] = 0;
 
-            for (int j = 0; j < 9; j++)
-            {
-                Console.WriteLine(result[j]);
-            }
-
+            game.fill_sudoku(result);
+            // game.display();
             result = game.greedyColoring(result);
-
-
-            for (int j = 0; j < 9; j++)
+/*
+            for (int i = 0; i < 81; i++)
             {
-                Console.WriteLine(result[j]);
+                result[i] = i;
             }
 
-
-                reverseTranscript(result);
+*/
+            game.fill_sudoku(result);
+            //game.display_matrice_adj();
+            reverseTranscript(result);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -106,11 +104,15 @@ namespace Sudoku
 
             for (int i = 0; i < 81; i++)
             {
-                it.Text = tab[i].ToString();
+                if (tab[i] != -1 )
+                {
+                    it.Text = tab[i].ToString();
+                }
 
+                it = groupBox1.GetNextControl(it, true);
             }
 
-           
+            
         }
 
     }
