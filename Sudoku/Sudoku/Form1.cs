@@ -44,7 +44,6 @@ namespace Sudoku
     
             result[0] = 0;
 
-            game.fill_sudoku(result);
             // game.display();
 
             result = game.greedyColoring(result);

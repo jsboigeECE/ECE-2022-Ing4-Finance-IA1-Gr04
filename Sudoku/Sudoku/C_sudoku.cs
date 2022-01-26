@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
+
 
 public class Case
 {
@@ -16,7 +16,7 @@ public class Case
 
         this.x = x;
         this.y = y;
-        v = -1;
+        v = 0;
 
         if (x < 3 && y < 3) m = 0;
         else if (x < 6 && y < 3) m = 1;
@@ -191,6 +191,20 @@ public class C_Sudoku
     {
         return s;
     }
+    public Case getcCase(int noCase)
+    {
+        int j = -1;
+        for (int i = 0; i < noCase; i++)
+        {
+            if (i % 9 == 0)
+            {
+                j++;
+            }
+            
+        }
+
+        return s[noCase % 9, j];
+    }
 
     public void setS(Case[,] s)
     {
@@ -251,27 +265,34 @@ public class C_Sudoku
 
         s[0, 0].setV(0);
 
-        // Assign colors to remaining V-1 vertices
-        result = AsignColors(result, available);
+        this.display();
 
-        this.fill_sudoku(result);
-/*
+
+
+
+        // Assign colors to remaining V-1 vertices
+        AsignColors( available);
+
         int j = -1;
 
-        for (int i = 0; i < 81; i++)
+        for (int u = 0; u < 81; u++)
         {
-            if (i % 9 == 0)
+            if (u % 9 == 0)
             {
                 j++;
             }
-            result[i] = s[i % 9, j].getV();
+
+            result[u] = s[u % 9, j].getV();
 
         }
-*/
+
+
+            this.fill_sudoku(result);
+
             return result;
     }
 
-    private int[] AsignColors(int[] result, bool[] available)
+    private void AsignColors( bool[] available)
     {
 
         int j = -1;
@@ -294,9 +315,9 @@ public class C_Sudoku
 
                     if (i>=0) 
                     {
-                        if (result[i] != -1 && result[i] < 9)
+                        if (s[i, 0].getV() != -1 && s[i, 0].getV() < 9)
                         {
-                            available[result[i]] = true;
+                            available[s[i, 0].getV()] = true;
                         }
                     }
 
@@ -312,8 +333,8 @@ public class C_Sudoku
                     }
                 }
 
-                result[u] = cr; // Assign the found color
-                this.fill_sudoku(result);
+                s[u % 9, j].setV(cr) ; // Assign the found color
+
                 // Reset the values back to false for the next iteration
                 it = s[u % 9, j].GetEnum();
                 while (it.MoveNext())
@@ -322,17 +343,16 @@ public class C_Sudoku
 
                     if (i >= 0)
                     {
-                        if (result[i] != -1 && result[i] < 9)
+                        if (s[i, 0].getV() != -1 && s[i, 0].getV() < 9)
                         {
 
-                            available[result[i]] = false;
+                            available[s[i, 0].getV()] = false;
                         }
                     }
 
                 }
             }
         }
-        return result;
     }
 
  
@@ -354,45 +374,7 @@ public class C_Sudoku
     }
 
 
-    private void AsignColors2(int[] result,int x,int y)
-    {
-
-                for (int clr = 1; clr < 10; clr++)
-                {
-
-                    for (int j = y; j < 9; j++)
-                    {
-                        for (int i = x; i < 9; i++)
-                        {
-
-                            if ((s[i, j].getV() != clr) && (s[i, j].verif_coloradj(clr) == false) && (s[i, j].getV() == 0))
-                            {
-                                s[i, j].setV(clr);
-                            }
-                        }
-
-                    }
-                    
-                    for (int j = 0; j < y; j++)
-                    {
-                        for (int i = 0; i < x; i++)
-                        {
-
-                            if ((s[i, j].getV() != clr) && (s[i, j].verif_coloradj(clr) == false) && (s[i, j].getV() == 0))
-                            {
-                                s[i, j].setV(clr);
-                            }
-                        }
-
-                    }
-                    
-                }
-         
-
-
-    }
-
-            private bool[] StoreColors()
+    private bool[] StoreColors()
     {
         bool[] available = new bool[9];
         for (int cr = 0; cr < 9; cr++)
