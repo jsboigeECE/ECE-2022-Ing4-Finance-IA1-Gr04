@@ -3,8 +3,8 @@ using System;
 
 namespace SudokuBackTrackingSolvers
 {
-    public class BackTrackingSolverVide : Sudoku.Shared.ISolverSudoku
-    {
+	public class BackTrackingSolver : Sudoku.Shared.ISolverSudoku
+	{
 
 		public static bool isSafe(GridSudoku s,
 						int row, int col,
@@ -19,11 +19,7 @@ namespace SudokuBackTrackingSolvers
 				// we are trying to
 				// place is already present in
 				// that row, return false;
-<<<<<<< Updated upstream
 				if (s.Cellules[row][d] == num)
-=======
-				if (s.Cellules[row][ d] == num)
->>>>>>> Stashed changes
 				{
 					return false;
 				}
@@ -32,19 +28,12 @@ namespace SudokuBackTrackingSolvers
 			// Column has the unique numbers (column-clash)
 			for (int r = 0; r < s.Cellules.GetLength(0); r++)
 			{
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 				// Check if the number
 				// we are trying to
 				// place is already present in
 				// that column, return false;
-<<<<<<< Updated upstream
 				if (s.Cellules[r][col] == num)
-=======
-				if (s.Cellules[r][ col] == num)
->>>>>>> Stashed changes
 				{
 					return false;
 				}
@@ -52,11 +41,7 @@ namespace SudokuBackTrackingSolvers
 
 			// corresponding square has
 			// unique number (box-clash)
-<<<<<<< Updated upstream
 			int sqrt = (int)Math.Sqrt(s.Cellules.GetLength(0));
-=======
-			int sqrt = (int)Math.Sqrt(s.Cellules.GetLength(0)) ;
->>>>>>> Stashed changes
 			int boxRowStart = row - row % sqrt;
 			int boxColStart = col - col % sqrt;
 
@@ -66,11 +51,7 @@ namespace SudokuBackTrackingSolvers
 				for (int d = boxColStart;
 					d < boxColStart + sqrt; d++)
 				{
-<<<<<<< Updated upstream
 					if (s.Cellules[r][d] == num)
-=======
-					if (s.Cellules[r][ d] == num)
->>>>>>> Stashed changes
 					{
 						return false;
 					}
@@ -80,13 +61,9 @@ namespace SudokuBackTrackingSolvers
 			// if there is no clash, it's safe
 			return true;
 		}
-<<<<<<< Updated upstream
-		public GridSudoku Solve(GridSudoku s)
-=======
 
 		public bool Solve(GridSudoku s)
->>>>>>> Stashed changes
-        {
+		{
 			int row = -1;
 			int col = -1;
 			bool isEmpty = true;
@@ -94,7 +71,7 @@ namespace SudokuBackTrackingSolvers
 			{
 				for (int j = 0; j < 9; j++)
 				{
-					if (s.Cellules[i] [j] == 0)
+					if (s.Cellules[i][j] == 0)
 					{
 						row = i;
 						col = j;
@@ -122,7 +99,7 @@ namespace SudokuBackTrackingSolvers
 			{
 				if (isSafe(s, row, col, num))
 				{
-					s.Cellules[row][ col] = num;
+					s.Cellules[row][col] = num;
 					if (Solve(s))
 					{
 
@@ -134,34 +111,17 @@ namespace SudokuBackTrackingSolvers
 					{
 
 						// Replace it
-						s.Cellules[row][ col] = 0;
+						s.Cellules[row][col] = 0;
 					}
 				}
 			}
 			return false;
-			
+
 		}
-
-	
-
-
 
         GridSudoku ISolverSudoku.Solve(GridSudoku s)
         {
-
-			if (Solve(s))
-			{
-
-				return s;
-			}
-			else
-			{
-				Console.Write("No solution");
-				return s;
-
-			}
-		}
+			return s;
+        }
     }
-
 }
-
