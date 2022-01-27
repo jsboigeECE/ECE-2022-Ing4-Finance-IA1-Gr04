@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace Sudoku
+namespace Sudoku.GraphColoringSolvers
 {
     public partial class Form1 : Form
     {

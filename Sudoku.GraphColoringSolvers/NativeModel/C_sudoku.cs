@@ -3,129 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class Case
-{
-    private int m;
-    private int x;
-    private int y;
-    private List<Case> adj = new List<Case>();
-    private int v;
-
-    public Case(int x, int y)
-    {
-
-        this.x = x;
-        this.y = y;
-        v = 0;
-
-        if (x < 3 && y < 3) m = 0;
-        else if (x < 6 && y < 3) m = 1;
-        else if (x < 9 && y < 3) m = 2;
-        else if (x < 3 && y < 6) m = 3;
-        else if (x < 6 && y < 6) m = 4;
-        else if (x < 9 && y < 6) m = 5;
-        else if (x < 3 && y < 9) m = 6;
-        else if (x < 6 && y < 9) m = 7;
-        else if (x < 9 && y < 9) m = 8;
-
-    }
-
-    public bool verif_coloradj(int clr)
-    {
-        foreach ( Case c in this.adj)
-        {
-            if (c.getV() == clr)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public int getX()
-    {
-        return x;
-    }
-
-    public int getY()
-    {
-        return y;
-    }
-
-    public int getV()
-    {
-        return v;
-    }
-
-    public List<Case> getAdj()
-    {
-        return adj;
-    }
-
-    public void setX(int x)
-    {
-        this.x = x;
-    }
-
-    public void setY(int y)
-    {
-        this.y = y;
-    }
-
-    public void setV(int v)
-    {
-        this.v = v;
-    }
-
-    public void setadj(List<Case> adj)
-    {
-         this.adj= adj;
-    }
-
-    public void displayadj()
-    {
-
-        IEnumerator<Case> it = this.GetEnum();
-        while (it.MoveNext())
-        {
-            Console.WriteLine(it.Current.getV());
-        }
-        Console.WriteLine(" ");
-    }
-
-    public void addadj(Case adjv)
-    {
-        this.adj.Add(adjv);
-    }
-
-    public IEnumerator<Case> GetEnum()
-    {
-        return this.adj.GetEnumerator();
-    }
-
-    public List<Case> getadj()
-    {
-        return this.adj;
-    }
-
-    public int getM()
-    {
-        return m;
-    }
-
-    public void setM(int m)
-    {
-        this.m = m;
-    }
-}
 public class C_Sudoku
 {
     private Case[,] s;
 
     public C_Sudoku()
     {
-        s = new Case[9,9];
+        s = new Case[9, 9];
 
         for (int i = 0; i < 9; i++)
         {
@@ -137,18 +21,18 @@ public class C_Sudoku
 
 
 
-        for (int j = 0; j< 9; j++)
+        for (int j = 0; j < 9; j++)
         {
-            for (int i = 0; i< 9; i++)
+            for (int i = 0; i < 9; i++)
             {
 
 
                 // algo adj matt
                 //Meme x et y
-                for (int a = 0; a< 9; a++)
+                for (int a = 0; a < 9; a++)
                 {
-                    if (a != i) s[i,j].addadj(s[a,j]);
- 
+                    if (a != i) s[i, j].addadj(s[a, j]);
+
                 }
 
                 for (int a = 0; a < 9; a++)
@@ -156,18 +40,18 @@ public class C_Sudoku
                     if (a != j) s[i, j].addadj(s[i, a]);
                 }
                 //Meme case
-                for (int b = 0; b< 9; b++)
+                for (int b = 0; b < 9; b++)
                 {
-                    for (int a = 0; a< 9; a++)
+                    for (int a = 0; a < 9; a++)
                     {
-                        
+
                         int k1 = s[a, b].getM();
                         int k2 = s[i, j].getM();
                         if (k1 == k2 && (a != i && b != j))
                         {
                             s[i, j].addadj(s[a, b]);
                         }
-                        
+
                     }
                 }
 
@@ -200,7 +84,7 @@ public class C_Sudoku
             {
                 j++;
             }
-            
+
         }
 
         return s[noCase % 9, j];
@@ -208,7 +92,7 @@ public class C_Sudoku
 
     public void setS(Case[,] s)
     {
-       this.s = s;
+        this.s = s;
     }
 
     public void fill_sudoku(int[] result)
@@ -271,7 +155,7 @@ public class C_Sudoku
 
 
         // Assign colors to remaining V-1 vertices
-        AsignColors( available);
+        AsignColors(available);
 
         int j = -1;
 
@@ -287,12 +171,12 @@ public class C_Sudoku
         }
 
 
-            this.fill_sudoku(result);
+        this.fill_sudoku(result);
 
-            return result;
+        return result;
     }
 
-    private void AsignColors( bool[] available)
+    private void AsignColors(bool[] available)
     {
 
         int j = -1;
@@ -313,7 +197,7 @@ public class C_Sudoku
                 {
                     int i = it.Current.getV();
 
-                    if (i>=0) 
+                    if (i >= 0)
                     {
                         if (s[i, 0].getV() != -1 && s[i, 0].getV() < 9)
                         {
@@ -333,7 +217,7 @@ public class C_Sudoku
                     }
                 }
 
-                s[u % 9, j].setV(cr) ; // Assign the found color
+                s[u % 9, j].setV(cr); // Assign the found color
 
                 // Reset the values back to false for the next iteration
                 it = s[u % 9, j].GetEnum();
@@ -355,7 +239,7 @@ public class C_Sudoku
         }
     }
 
- 
+
 
     private bool verif_color(int clr)
     {

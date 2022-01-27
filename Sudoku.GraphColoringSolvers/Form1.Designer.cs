@@ -1,4 +1,4 @@
-﻿namespace Sudoku
+﻿namespace Sudoku.GraphColoringSolvers
 {
     partial class Form1
     {
