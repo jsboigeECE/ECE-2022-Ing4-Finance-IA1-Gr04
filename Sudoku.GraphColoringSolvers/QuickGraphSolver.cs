@@ -6,7 +6,7 @@ using Sudoku.Shared;
 
 namespace Sudoku.GraphColoringSolvers.GraphColoringSolvers
 {
-    public class QuickGraphSolver:Sudoku.Shared.ISolverSudoku
+    public class GraphColoringQuickGraphSolver:Sudoku.Shared.ISolverSudoku
     {
         public GridSudoku Solve(GridSudoku s)
         {
