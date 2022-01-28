@@ -11,7 +11,7 @@ namespace Sudoku.CSPSolvers
             return s;
         }
     
-        /* public GridSudoku Solve(GridSudoku s)
+       /*  public GridSudoku Solve(GridSudoku s)
         {
             //System.Diagnostics.Debugger.Break();
 
@@ -28,16 +28,18 @@ namespace Sudoku.CSPSolvers
                 scope.Set("sudoku", pySudoku);
 
                 // the person object may now be used in Python
-                string code = Resources.SelfCallSolver_py;
+                string code = Resources.sudokucsp_py;
                 scope.Exec(code);
                 var result = scope.Get("solvedSudoku");
                 var toReturn = result.As<Shared.GridSudoku>();
                 return toReturn;
+                
             }
             //}
 
         }
         */
+        
     }
 
     
