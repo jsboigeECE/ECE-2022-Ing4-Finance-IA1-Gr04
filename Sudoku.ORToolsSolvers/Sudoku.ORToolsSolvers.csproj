@@ -7,4 +7,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Google.OrTools" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Google.OrTools" Version="9.2.9972" />
+  </ItemGroup>
 </Project>
