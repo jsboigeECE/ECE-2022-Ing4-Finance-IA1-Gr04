@@ -28,7 +28,7 @@ namespace Sudoku.NeuralSolvers
                 scope.Set("modelPath", pyModelPath);
 
                 // the person object may now be used in Python
-                string code = Resources.neural_nets_as_sudoku_solvers_py;
+                string code = Resources.neuralnets_py;
                 scope.Exec(code);
                 var result = scope.Get("solvedSudoku");
                 var toReturn = result.As<Shared.GridSudoku>();
