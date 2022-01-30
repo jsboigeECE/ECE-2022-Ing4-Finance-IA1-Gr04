@@ -23,7 +23,7 @@ namespace Sudoku.NeuralSolvers
                 // create a Python variable "person"
                 scope.Set("sudoku", pySudoku);
 
-                var modelPath = Path.Combine(Environment.CurrentDirectory, @"Resources\monModele.onnx");
+                var modelPath = Path.Combine(Environment.CurrentDirectory, @"Resources\train_model.h5");
                 PyObject pyModelPath = modelPath.ToPython();
                 scope.Set("modelPath", pyModelPath);
 
@@ -40,7 +40,10 @@ namespace Sudoku.NeuralSolvers
 
         protected override void InitializePythonComponents()
         {
-            InstallPipModule("Tensorflow");
+            InstallPipModule("tensorflow");
+            InstallPipModule("pandas");
+            InstallPipModule("numpy");
+
             base.InitializePythonComponents();
         }
 
