@@ -1,13 +1,52 @@
 ﻿using Sudoku.Shared;
+
 using System;
+using Python.Runtime;
+using System.IO;
 
 namespace Sudoku.NeuralSolvers
 {
-    public class NeuralSolvers : Sudoku.Shared.ISolverSudoku
+    public class NeuralSolvers : Sudoku.Shared.PythonSolverBase
     {
-        public GridSudoku Solve(GridSudoku s)
+        public override GridSudoku Solve(GridSudoku s)
         {
-            return s;
+            //System.Diagnostics.Debugger.Break();
+
+            //For some reason, the Benchmark runner won't manage to get the mutex whereas individual execution doesn't cause issues
+            //using (Py.GIL())
+            //{
+            // create a Python scope
+            using (PyModule scope = Py.CreateScope())
+            {
+                // convert the Person object to a PyObject
+                PyObject pySudoku = s.ToPython();
+                // create a Python variable "person"
+                scope.Set("sudoku", pySudoku);
+
+                var modelPath = Path.Combine(Environment.CurrentDirectory, @"Resources\monModele.onnx");
+                PyObject pyModelPath = modelPath.ToPython();
+                scope.Set("modelPath", pyModelPath);
+
+                // the person object may now be used in Python
+                string code = Resources.neural_nets_as_sudoku_solvers_py;
+                scope.Exec(code);
+                var result = scope.Get("solvedSudoku");
+                var toReturn = result.As<Shared.GridSudoku>();
+                return toReturn;
+            }
         }
+
+        
+
+        protected override void InitializePythonComponents()
+        {
+            InstallPipModule("Tensorflow");
+            base.InitializePythonComponents();
+        }
+
     }
+
+
+
+
 }
