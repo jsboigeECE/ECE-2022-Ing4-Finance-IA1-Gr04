@@ -73,7 +73,7 @@ namespace Sudoku.NeuralSolvers {
         /// </summary>
         internal static string neural_nets_as_sudoku_solvers_py {
             get {
-                return ResourceManager.GetString("neural-nets-as-sudoku-solvers.py", resourceCulture);
+                return ResourceManager.GetString("neuralnets.py", resourceCulture);
             }
         }
     }
