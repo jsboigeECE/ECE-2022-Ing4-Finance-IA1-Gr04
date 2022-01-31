@@ -71,9 +71,10 @@ namespace Sudoku.NeuralSolvers {
         ///# I read the https://github.com/Kyubyong/sudoku to see if CNNs can crack Sudoku puzzles. 
         ///# I was wondering if we could achieve similar results with a simpler n [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
-        internal static string neural_nets_as_sudoku_solvers_py {
+        internal static string neuralnets_py
+        {
             get {
-                return ResourceManager.GetString("neural-nets-as-sudoku-solvers.py", resourceCulture);
+                return ResourceManager.GetString("neuralnets.py", resourceCulture);
             }
         }
     }
