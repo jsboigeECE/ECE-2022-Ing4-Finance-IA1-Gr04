@@ -14,36 +14,23 @@ namespace Sudoku.LaNorvigSolveur
             .Aggregate("", (s1, s2) => s1 + s2, s => s))
                 .Aggregate("", (s1, s2) => s1 + s2, s => s);
             var sudokuDICO = LinqSudokuSolver.parse_grid(sAuBonFormat);
-
             var solution = LinqSudokuSolver.search(sudokuDICO);
+            
             List<String> lstval = new List<string>();
 
-            //Affichage de toute les valeurs et des clés du dictionnaires
-
-            /*foreach (KeyValuePair<string, string> kvp in solution)
-            {
-                string valeur = Convert.ToString(kvp.Value);
-                lstval.Add(valeur);
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-            }
-            Console.Write(lstval);*/
-
-
-            //Affichage d'une valeur en fonction de sa clé 
-            /*for(int i = 0; i < 9; i++) 
-            { 
-                Console.WriteLine(solution["A1"]);
-                
-            }*/
-
-            
             foreach (string val in solution.Values)
             {             
-                Console.Write(val + "\n");       
+                lstval.Add(val);
             }
-            Console.WriteLine("\n");
-
-            
+            int compter = 0;
+            for(int i = 0; i < 9; i++)
+            {
+                for(int j = 0; j < 9; j++)
+                {
+                    s.Cellules[j][i] = Convert.ToInt32(lstval[compter]);
+                    compter++;
+                }
+            }         
 
             return s;
         }
