@@ -17,13 +17,34 @@ namespace Sudoku.LaNorvigSolveur
 
             var solution = LinqSudokuSolver.search(sudokuDICO);
             List<String> lstval = new List<string>();
-            foreach (KeyValuePair<string, string> kvp in solution)
+
+            //Affichage de toute les valeurs et des clés du dictionnaires
+
+            /*foreach (KeyValuePair<string, string> kvp in solution)
             {
                 string valeur = Convert.ToString(kvp.Value);
                 lstval.Add(valeur);
-                //Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
             }
-            Console.Write(lstval);
+            Console.Write(lstval);*/
+
+
+            //Affichage d'une valeur en fonction de sa clé 
+            /*for(int i = 0; i < 9; i++) 
+            { 
+                Console.WriteLine(solution["A1"]);
+                
+            }*/
+
+            
+            foreach (string val in solution.Values)
+            {             
+                Console.Write(val + "\n");       
+            }
+            Console.WriteLine("\n");
+
+            
+
             return s;
         }
 
