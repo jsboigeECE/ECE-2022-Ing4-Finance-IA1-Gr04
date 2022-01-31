@@ -11,7 +11,7 @@ namespace Sudoku.CSPSolvers
             return s;
         }
     
-       /*  public GridSudoku Solve(GridSudoku s)
+         public GridSudoku Solve(GridSudoku s)
         {
             //System.Diagnostics.Debugger.Break();
 
@@ -38,7 +38,7 @@ namespace Sudoku.CSPSolvers
             //}
 
         }
-        */
+        
         
     }
 
