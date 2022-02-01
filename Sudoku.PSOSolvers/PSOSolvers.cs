@@ -407,7 +407,22 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
 
         public GridSudoku Solve(GridSudoku s)
         {
-            throw new NotImplementedException();
+            var converted = s.Cellules.To2D();
+            var sudoku = Sudoku.New(converted);
+
+            Sudoku solvedSudoku ;
+
+            var numOrganisms = 200;
+            //On augmente le nombre d'organismes jusqu'à ce qu'une solution soit trouvée
+            do
+            {
+                solvedSudoku = SolveInternal(sudoku, numOrganisms, 5000);
+                numOrganisms *= 2;
+            } while (solvedSudoku.Error > 0);
+
+            var solvedCells = solvedSudoku.CellValues.ToJaggedArray();
+            s.Cellules = solvedCells;
+            return s;
         }
 
         //GridSudoku ISolverSudoku.Solve(GridSudoku s)

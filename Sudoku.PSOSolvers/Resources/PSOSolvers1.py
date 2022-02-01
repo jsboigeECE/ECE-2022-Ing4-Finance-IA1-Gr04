@@ -13,5 +13,3 @@ instance = ((0,0,0,0,9,4,0,3,0),
 
             #r = [ [ m.evaluate(X[i][j]).as_long() for j in range(9) ] A adapter à la mathode PSO
           #for i in range(9) ]
-
-  class
