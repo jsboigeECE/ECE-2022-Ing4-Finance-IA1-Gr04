@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sudoku.NeuralSolvers {
+namespace Sudoku.PSOSolvers {
     using System;
     
     
@@ -19,7 +19,7 @@ namespace Sudoku.NeuralSolvers {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -39,7 +39,7 @@ namespace Sudoku.NeuralSolvers {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sudoku.NeuralSolvers.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Sudoku.PSOSolvers.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,25 @@ namespace Sudoku.NeuralSolvers {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à #!/usr/bin/env python
-        ///# coding: utf-8
+        ///   Recherche une chaîne localisée semblable à 
         ///
-        ///# # Neural nets as Sudoku solvers
-        ///# 
-        ///# Since the dataset was initially created for neural-nets, I focus on this approach. Obviously, there are other ways to solve Sudoku puzzle, some of them are way more intuitive than neural-nets. However, it was an opportunity to get a first hands-on with Keras framework !
-        ///# 
-        ///# I read the https://github.com/Kyubyong/sudoku to see if CNNs can crack Sudoku puzzles. 
-        ///# I was wondering if we could achieve similar results with a simpler n [le reste de la chaîne a été tronqué]&quot;;.
+        ///#sudoku instance, we use &apos;0&apos; for empty cells
+        ///instance = ((0,0,0,0,9,4,0,3,0),
+        ///            (0,0,0,5,1,0,0,0,7),
+        ///            (0,8,9,0,0,0,0,4,0),
+        ///            (0,0,0,0,0,0,2,0,8),
+        ///            (0,6,0,2,0,1,0,5,0),
+        ///            (1,0,2,0,0,0,0,0,0),
+        ///            (0,7,0,0,0,0,5,2,0),
+        ///            (9,0,0,0,6,5,0,0,0),
+        ///            (0,4,0,9,7,0,0,0,0))
+        ///
+        ///            #r = [ [ m.evaluate(X[i][j]).as_long() for j in range(9) ] A adapter à la mathode PSO
+        ///          #for i in range(9) ].
         /// </summary>
-        internal static string neuralnets_py
-        {
+        internal static string PSOSolvers1_py {
             get {
-                return ResourceManager.GetString("neuralnets.py", resourceCulture);
+                return ResourceManager.GetString("PSOSolvers1.py", resourceCulture);
             }
         }
     }
