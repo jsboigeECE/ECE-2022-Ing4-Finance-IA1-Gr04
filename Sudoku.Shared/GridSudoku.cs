@@ -92,7 +92,7 @@ namespace Sudoku.Shared
         {
         }
 
-
+        
 
         // The List property makes it easier to manipulate cells,
         public int[][] Cellules { get; set; } = NeighbourIndices.Select(r => new int[9]).ToArray();

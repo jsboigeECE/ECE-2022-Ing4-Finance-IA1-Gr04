@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="SudokuTools\**" />
+    <EmbeddedResource Remove="SudokuTools\**" />
+    <None Remove="SudokuTools\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="pythonnet" Version="3.0.0-preview2022-01-03" />
   </ItemGroup>
 
