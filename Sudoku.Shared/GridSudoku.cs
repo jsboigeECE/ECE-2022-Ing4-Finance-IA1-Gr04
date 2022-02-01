@@ -72,7 +72,8 @@ namespace Sudoku.Shared
                         {
                             foreach (var voisin in voisinage)
                             {
-                                if (!cellVoisinage.Contains(voisin))
+                                //We don't include the current cell
+                                if (!cellVoisinage.Contains(voisin) && voisin.row != rowIndex || voisin.column != columnIndex)
                                 {
                                     cellVoisinage.Add(voisin);
                                 }
@@ -91,7 +92,7 @@ namespace Sudoku.Shared
         {
         }
 
-
+        
 
         // The List property makes it easier to manipulate cells,
         public int[][] Cellules { get; set; } = NeighbourIndices.Select(r => new int[9]).ToArray();
