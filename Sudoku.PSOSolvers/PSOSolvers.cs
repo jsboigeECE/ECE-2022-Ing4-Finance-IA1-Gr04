@@ -1,24 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
+using System.Threading.Tasks;
 using Python.Runtime;
 using Sudoku.Shared;
 
 namespace Sudoku.PSOSolvers  //Ceci est un test
 {
-    public class PSOSolver1 : Sudoku.Shared.ISolverSudoku
+    public class PSOSolver1 : Sudoku.Shared.ISolverSudoku //Nous commencerons par coder une classe PSOSolver1 qui fera parti de l'un de nos solvers 
     {
-        public GridSudoku Solve(GridSudoku s)
-        {
+       public Shared.GridSudoku Solve(Shared.GridSudoku s) //Le solveur reçoit la grille Sudoku que la console nous donne au départ
+       {
+
+
             return s;
-        }
+       }
     }
-
-    public class Compteur
-    {
-        public CounterChiffres()
-
-    }
-
-    
+}
+ 
     //public class PSOSolvers1 : PythonSolverBase
     //{
 
@@ -54,9 +54,6 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
     //        //InstallPipModule("z3-solver"); A adapter au modèle PSO
     //        base.InitializePythonComponents();
     //    }
-
-
-
     //}
-}
+
 
