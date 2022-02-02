@@ -11,61 +11,42 @@ namespace Sudoku.CSPSolvers
 {
     public class CSPSolverVide : PythonSolverBase
     {
-       /* public GridSudoku Solve(GridSudoku s)
+        public override GridSudoku Solve(GridSudoku s)
         {
-            return s;
-        }*/
-    
-         public override Shared.GridSudoku Solve(Shared.GridSudoku s)
-        { 
-            
-            // create a Python scope
-            
-            using (PyModule scope = Py.CreateScope())
+            using (Py.GIL())
             {
-                // convert the Person object to a PyObject
-                PyObject pySudoku = s.ToPython();
-               
-                // create a Python variable "person"
-                scope.Set("sudoku", pySudoku);
+                using (PyModule scope = Py.CreateScope())
+                {
+                    PyObject pySudoku = s.ToPython();
 
-               Console.WriteLine(" Ca bloque après !!");
-                // the person object may now be used in Python
-                string code = Resources.MainGui_py;
-                scope.Exec(code);
+                    var inf = 0;
+                    Console.WriteLine("\nChoose your method: \n");
+                    Console.WriteLine("1 - No inference \n2 - forward_checking \n3 - MAC");
+                    inf = int.Parse(Console.ReadLine());
+                    
+                    //on recupere le choix de l inference de l utilisateur
+                    scope.Set("inference", inf);
+                    scope.Set("sudoku", pySudoku);
 
-                Console.WriteLine("On a executer le fichier MainGui_py!");
+                    string code = Resources.MainGui_py;
+                    scope.Exec(code);
 
-                //!!!!!!!!!!!!!! .Get()-> notre nom de variable à recup !!!!!!!!!!!!!
-                var result = scope.Get("self");
-                var toReturn = result.As<Shared.GridSudoku>();
+                    Console.WriteLine("On a executer le fichier MainGui_py!");
 
-                Console.WriteLine("resulat!");
-                return toReturn;
-                
+                    var result = scope.Get("sudoku");
+                    Console.WriteLine("Sudoku: " + result);
+                    var toReturn = result.As<Shared.GridSudoku>();
+
+                    Console.WriteLine("resulat!");
+                    return toReturn;
+                }
             }
-            //}
-
         }
+
         protected override void InitializePythonComponents()
         {
             //InstallPipModule("z3-solver"); A adapter au modèle PSO
             base.InitializePythonComponents();
-        }
-
-/*
-        public GridSudoku test(GridSudoku s)
-        {
-            
-            sudooo = SudokuCSP(s);
-
-
-        }
-        */
-
-       
-        
+        }        
     }
-    
-     
 }
