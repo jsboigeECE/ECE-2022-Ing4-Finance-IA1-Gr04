@@ -36,7 +36,7 @@ namespace Sudoku.SimulatedAnnealingSolvers
 
         protected override void InitializePythonComponents()
         {
-            //InstallPipModule("z3-solver"); A adapter au modèle PSO
+            InstallPipModule("numpy");
             base.InitializePythonComponents();
         }
 
