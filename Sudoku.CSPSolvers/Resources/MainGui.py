@@ -321,12 +321,19 @@ class Main:
         s = SudokuCSP(self.current_board)
         inf, dv, suv = None, None, None
 
+
+        # Pour que le bencmark fonctionne il faut commenter les lignes ci-dessous :
         if inference == 1:
             inf = no_inference
         elif inference == 2:
             inf = forward_checking
         elif inference == 3:
             inf = mac
+
+
+        # Pour que le bencmark fonctionne il faut decommenter la ligne ci-dessous :
+        #inf = no_inference
+
 
         suv = mrv
 

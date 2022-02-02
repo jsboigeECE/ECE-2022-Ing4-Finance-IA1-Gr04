@@ -22,10 +22,13 @@ namespace Sudoku.CSPSolvers
                     var inf = 0;
                     Console.WriteLine("\nChoose your method: \n");
                     Console.WriteLine("1 - No inference \n2 - forward_checking \n3 - MAC");
-                    inf = int.Parse(Console.ReadLine());
-                    
+
                     //on recupere le choix de l inference de l utilisateur
+                    //Pour que le bencmark fonctionne il faut commenter les 2 lignes ci-dessous :
+                    inf = int.Parse(Console.ReadLine());
                     scope.Set("inference", inf);
+
+
                     scope.Set("sudoku", pySudoku);
 
                     string code = Resources.MainGui_py;
