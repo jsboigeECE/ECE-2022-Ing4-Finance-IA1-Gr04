@@ -131,7 +131,7 @@ namespace SudokuBackTrackingSolvers
                      {
                             Console.Write("No solution");
                             return s;
-							//hello
+							
  
                      }
               }
