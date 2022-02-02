@@ -67,10 +67,10 @@ def load_data(nb_train=40000, nb_test=10000, full=False):
     """
     # if full is true, load the whole dataset
     if full:
-        sudokus = pd.read_csv('../Desktop/sudoku.csv').values
+        sudokus = pd.read_csv('C:/Users/srabh/Desktop/sudoku.csv').values
     else:
         sudokus = next(
-            pd.read_csv('../Desktop/sudoku.csv', chunksize=(nb_train + nb_test))
+            pd.read_csv('C:/Users/srabh/Desktop/sudoku.csv', chunksize=(nb_train + nb_test))
         ).values
         
     quizzes, solutions = sudokus.T

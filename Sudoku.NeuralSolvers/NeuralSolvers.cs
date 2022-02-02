@@ -4,6 +4,7 @@ using System;
 using Python.Runtime;
 using System.IO;
 
+
 namespace Sudoku.NeuralSolvers
 {
     public class NeuralSolvers : Sudoku.Shared.PythonSolverBase
@@ -17,13 +18,13 @@ namespace Sudoku.NeuralSolvers
             //{
             // create a Python scope
             using (PyModule scope = Py.CreateScope())
-            {
+           {
                 // convert the Person object to a PyObject
                 PyObject pySudoku = s.ToPython();
                 // create a Python variable "person"
                 scope.Set("sudoku", pySudoku);
 
-                var modelPath = Path.Combine(Environment.CurrentDirectory, @"Resources\train_model.h5");
+                var modelPath = Path.Combine(Environment.CurrentDirectory, @"Resources\train_model_test2.h5");
                 PyObject pyModelPath = modelPath.ToPython();
                 scope.Set("modelPath", pyModelPath);
 
