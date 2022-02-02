@@ -16,6 +16,51 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
         static Random rnd = new Random(0);  // Initialisation d'une variable aléatoire qui nous permettra d'en initialiser d'autres dans la suite du code
         
         public enum OrganismType //La classe OrganismType est la classe qui représentera le type de particule qu'on aura dans l'algorithme PSO 
+
+        public const int taille = 9;
+        public const int taille_block = 3;
+        static Random rnd = new Random(0);
+        //int maxrestarts = 20;
+        // int maxepochs = 5000;
+        //int numorganisms = 200;
+
+        public enum OrganismType
+
+        public const int taille = 9;
+        public const int taille_block = 3;
+        static Random rnd = new Random(0);
+        //int maxrestarts = 20;
+        // int maxepochs = 5000;
+        //int numorganisms = 200;
+
+        public enum OrganismType
+
+        public const int taille = 9;
+        public const int taille_block = 3;
+        static Random rnd = new Random(0);
+        //int maxrestarts = 20;
+        // int maxepochs = 5000;
+        //int numorganisms = 200;
+
+        public enum OrganismType
+
+        public const int taille = 9;
+        public const int taille_block = 3;
+        static Random rnd = new Random(0);
+        //int maxrestarts = 20;
+        // int maxepochs = 5000;
+        //int numorganisms = 200;
+
+        public enum OrganismType
+
+        public const int taille = 9;
+        public const int taille_block = 3;
+        static Random rnd = new Random(0);
+        //int maxrestarts = 20;
+        // int maxepochs = 5000;
+        //int numorganisms = 200;
+
+        public enum OrganismType
         {
             Worker,
             Explorer
@@ -37,15 +82,62 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
             }
         }
 
-        private Sudoku SolveInternal(Sudoku sudoku, int numOrganisms, int maxEpochs) //Cette méthode représentera le coeur de notre Solver 
-        {                                                                        //Elle recevra en paramètre la grille Sudoku, le nombre d'Organismes et maxEpochs
-            var numberOfWorkers = (int)(numOrganisms * 0.90); //Le nombre de particules de type Workers sera initialisé à 90 % du nombre total de particules 
-            var hive = new Organism[numOrganisms]; //Initialisation de notre Swarm en fonction du nombre d'organismes (Particules)
+        // private int Error(Sudoku soln)
+        // {
+        //return CountErrors(true) + CountErrors(false);
 
-            var bestError = int.MaxValue; //On initialise l'entier de la meilleure erreur à une valeur maximale 
-            Sudoku bestSolution = null; //La meilleure solution sera initialisée à null
+        //int CountErrors(bool countByRow)
+        // {
+        // var errors = 0;
+        // for (var i = 0; i < PSOSolvers1.taille; ++i)
+        // {
+        //    var counts = new int[PSOSolvers1.taille];
+        //    for (var j = 0; j < PSOSolvers1.taille; ++j)
+        //    {
+        //       var cellValue = countByRow ? CellValues[i, j] : CellValues[j, i];
+        //       ++counts[cellValue - 1];
+        //  }
 
-            for (var i = 0; i < numOrganisms; ++i) //On va parcourir toutes nos Organismes (particules)
+        //  for (var k = 0; k < PSOSolvers1.taille; ++k)
+        //  {
+        //     if (counts[k] == 0)
+        //         ++errors;
+        // }
+        // }
+
+        // return errors;
+        // }
+        // }
+
+        //public Sudoku Solvette(Sudoku sudoku, int numOrganisms, int maxEpochs, int maxRestarts)
+        //{
+        // var error = int.MaxValue;
+        // GridSudoku bestSolution = null;
+        // var attempt = 0;
+        // while (error != 0 && attempt < maxRestarts)
+        // {
+        //  Console.WriteLine($"Attempt: {attempt}");
+        //  rnd = new Random(attempt);
+        //  bestSolution = SolveInternal(sudoku, numOrganisms, maxEpochs);
+        //  error = bestSolution.error;
+        //  ++attempt;
+        // }
+
+        // return bestSolution;
+        // }
+
+
+
+
+        private Sudoku SolveInternal(Sudoku sudoku, int numOrganisms, int maxEpochs)
+        {
+            var numberOfWorkers = (int)(numOrganisms * 0.90);
+            var hive = new Organism[numOrganisms];
+
+            var bestError = int.MaxValue;
+            Sudoku bestSolution = null;
+
+            for (var i = 0; i < numOrganisms; ++i) //en comm
             {
                 var organismType = i < numberOfWorkers
                  ? OrganismType.Worker
@@ -366,22 +458,12 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
             return s;
         }
 
-        //GridSudoku ISolverSudoku.Solve(GridSudoku s)
-        //{
-        //throw new NotImplementedException();
-        //}
-    } // Program
+        
+    } 
 
 
 
 }
-
-
-
-
-    //public class PSOSolvers1 : PythonSolverBase
-    //{
-
 
     //    public override Shared.GridSudoku Solve(Shared.GridSudoku s)
     //    {
@@ -419,6 +501,19 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
 
     //}
 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
     //public class PSOSolvers1 : PythonSolverBase
     //{
 
