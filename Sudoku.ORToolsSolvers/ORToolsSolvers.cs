@@ -8,10 +8,10 @@ using Google.OrTools.ConstraintSolver;
 namespace Sudoku.ORToolsSolvers
 {
 
-    public class ORToolsSolver : ISolverSudoku
+    public class ORToolsConstraintSolver : ISolverSudoku
     {
 
-        public Shared.GridSudoku Solve(Shared.GridSudoku s)
+        public Shared.GridSudoku Solve(Shared.GridSudoku s1)
         {
 
             Solver solver = new Solver("Sudoku");
@@ -23,7 +23,7 @@ namespace Sudoku.ORToolsSolvers
             IEnumerable<int> RANGE = Enumerable.Range(0, n);
 
 
-            int[][] grille = s.Cellules;
+            int[][] grille = s1.Cellules;
 
             int[,] initial_grid = grille.To2D();
 
@@ -79,7 +79,7 @@ namespace Sudoku.ORToolsSolvers
                     for (int j = 0; j < n; j++)
                     {
                         //Console.Write("{0} ", grid[i, j].Value());
-                        s.Cellules[i][j] = (int)grid[i, j].Value();
+                        s1.Cellules[i][j] = (int)grid[i, j].Value();
                     }
                     //Console.WriteLine();
                 }
@@ -97,7 +97,20 @@ namespace Sudoku.ORToolsSolvers
              
 
 
-            return s;
+            return s1;
+
+        }
+
+    }
+
+
+
+    public class ORToolsIntegerOptimizationSolver : ISolverSudoku
+    {
+        public Shared.GridSudoku Solve(Shared.GridSudoku s2)
+        {
+
+            return s2;
 
         }
 
