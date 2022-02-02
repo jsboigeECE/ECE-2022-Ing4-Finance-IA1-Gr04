@@ -11,21 +11,12 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
 {
     public class PSOSolvers1 : ISolverSudoku //Nous commencerons par coder une classe PSOSolver1 qui fera parti de l'un de nos solvers 
     {
-        //public Shared.GridSudoku Solve(Shared.GridSudoku s) //Le solveur reçoit la grille Sudoku que la console nous donne au départ
-        //{
-
-
-        //     return s;
-        //}
-
-        
+               
 
         public const int taille = 9;
         public const int taille_block = 3;
         static Random rnd = new Random(0);
-        //int maxrestarts = 20;
-        // int maxepochs = 5000;
-        //int numorganisms = 200;
+     
 
         public enum OrganismType
         {
@@ -48,51 +39,6 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
                 Matrix = PSOSolvers1.DuplicateMatrix(m);
             }
         }
-
-        // private int Error(Sudoku soln)
-        // {
-        //return CountErrors(true) + CountErrors(false);
-
-        //int CountErrors(bool countByRow)
-        // {
-        // var errors = 0;
-        // for (var i = 0; i < PSOSolvers1.taille; ++i)
-        // {
-        //    var counts = new int[PSOSolvers1.taille];
-        //    for (var j = 0; j < PSOSolvers1.taille; ++j)
-        //    {
-        //       var cellValue = countByRow ? CellValues[i, j] : CellValues[j, i];
-        //       ++counts[cellValue - 1];
-        //  }
-
-        //  for (var k = 0; k < PSOSolvers1.taille; ++k)
-        //  {
-        //     if (counts[k] == 0)
-        //         ++errors;
-        // }
-        // }
-
-        // return errors;
-        // }
-        // }
-
-        //public Sudoku Solvette(Sudoku sudoku, int numOrganisms, int maxEpochs, int maxRestarts)
-        //{
-        // var error = int.MaxValue;
-        // GridSudoku bestSolution = null;
-        // var attempt = 0;
-        // while (error != 0 && attempt < maxRestarts)
-        // {
-        //  Console.WriteLine($"Attempt: {attempt}");
-        //  rnd = new Random(attempt);
-        //  bestSolution = SolveInternal(sudoku, numOrganisms, maxEpochs);
-        //  error = bestSolution.error;
-        //  ++attempt;
-        // }
-
-        // return bestSolution;
-        // }
-
 
 
 
@@ -425,107 +371,12 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
             return s;
         }
 
-        //GridSudoku ISolverSudoku.Solve(GridSudoku s)
-        //{
-        //throw new NotImplementedException();
-        //}
-    } // Program
+        
+    } 
 
 
 
 }
 
-
-
-
-    //public class PSOSolvers1 : PythonSolverBase
-    //{
-
-
-    //    public override Shared.GridSudoku Solve(Shared.GridSudoku s)
-    //    {
-
-    //        //using (Py.GIL())
-    //        //{
-    //        // create a Python scope
-    //        using (PyModule scope = Py.CreateScope())
-    //        {
-    //            // convert the Person object to a PyObject
-    //            PyObject pyCells = s.Cellules.ToPython();
-
-    //            // create a Python variable "person"
-    //            scope.Set("instance", pyCells);
-
-    //            // the person object may now be used in Python
-    //            string code = Resources.PSOSolvers1_py;
-    //            scope.Exec(code);
-    //            var result = scope.Get("r");
-    //            var managedResult = result.As<int[][]>();
-    //            //var convertesdResult = managedResult.Select(objList => objList.Select(o => (int)o).ToArray()).ToArray();
-    //            return new Shared.GridSudoku() { Cellules = managedResult };
-    //        }
-    //        //}
-
-    //    }
-
-    //    protected override void InitializePythonComponents()
-    //    {
-    //        //InstallPipModule("z3-solver"); A adapter au modèle PSO
-    //        base.InitializePythonComponents();
-    //    }
-
-
-
-    //}
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-    //public class PSOSolvers1 : PythonSolverBase
-    //{
-
-
-    //    public override Shared.GridSudoku Solve(Shared.GridSudoku s)
-    //    {
-
-    //        //using (Py.GIL())
-    //        //{
-    //        // create a Python scope
-    //        using (PyModule scope = Py.CreateScope())
-    //        {
-    //            // convert the Person object to a PyObject
-    //            PyObject pyCells = s.Cellules.ToPython();
-
-    //            // create a Python variable "person"
-    //            scope.Set("instance", pyCells);
-
-    //            // the person object may now be used in Python
-    //            string code = Resources.PSOSolvers1_py;
-    //            scope.Exec(code);
-    //            var result = scope.Get("r");
-    //            var managedResult = result.As<int[][]>();
-    //            //var convertesdResult = managedResult.Select(objList => objList.Select(o => (int)o).ToArray()).ToArray();
-    //            return new Shared.GridSudoku() { Cellules = managedResult };
-    //        }
-    //        //}
-
-    //    }
-
-    //    protected override void InitializePythonComponents()
-    //    {
-    //        //InstallPipModule("z3-solver"); A adapter au modèle PSO
-    //        base.InitializePythonComponents();
-    //    }
-    //}
 
 
