@@ -119,9 +119,20 @@ namespace SudokuBackTrackingSolvers
 
 		}
 
-        GridSudoku ISolverSudoku.Solve(GridSudoku s)
+            GridSudoku ISolverSudoku.Solve(GridSudoku s)
         {
-			return s;
-        }
+ 
+                     if (Solve(s))
+                     {
+ 
+                            return s;
+                     }
+                     else
+                     {
+                            Console.Write("No solution");
+                            return s;
+ 
+                     }
+              }
     }
 }
