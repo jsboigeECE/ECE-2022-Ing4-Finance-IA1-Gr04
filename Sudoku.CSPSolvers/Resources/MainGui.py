@@ -321,18 +321,23 @@ class Main:
         s = SudokuCSP(self.current_board)
         inf, dv, suv = None, None, None
 
-        if inference == 1:
+        if inference == 0:
             inf = no_inference
-        elif inference == 2:
+        elif inference == 1:
             inf = forward_checking
-        elif inference == 3:
+        elif inference == 2:
             inf = mac
 
-        suv = mrv
+
+        suv = first_unassigned_variable
+        if useMRVHeuristics:
+            suv = mrv
+        odv = unordered_domain_values
+        if useLCVHeuristics:
+            odv = lcv
 
         start = timer()
-        a = backtracking_search(s, select_unassigned_variable=suv, order_domain_values=unordered_domain_values,
-                                inference=inf)
+        a = backtracking_search(s, select_unassigned_variable=suv, order_domain_values=odv, inference=inf)
         end = timer()
         # if a isn't null we found a solution so we will show it in the current board
         # if a is null then we send a message to the user that the initial board
