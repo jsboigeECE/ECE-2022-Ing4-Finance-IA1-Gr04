@@ -11,70 +11,31 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
 {
     public class PSOSolvers1 : ISolverSudoku //Nous commencerons par coder une classe PSOSolver1 qui fera parti de l'un de nos solvers 
     {
-        public const int taille = 9; //Taille de la grille Sudoku
-        public const int taille_block = 3;  //Taille de la sous-grille 3x3
-        static Random rnd = new Random(0);  // Initialisation d'une variable aléatoire qui nous permettra d'en initialiser d'autres dans la suite du code
-        
-        public enum OrganismType //La classe OrganismType est la classe qui représentera le type de particule qu'on aura dans l'algorithme PSO 
-
+               
+        //Taille de la matrice
         public const int taille = 9;
         public const int taille_block = 3;
         static Random rnd = new Random(0);
-        //int maxrestarts = 20;
-        // int maxepochs = 5000;
-        //int numorganisms = 200;
-
-        public enum OrganismType
-
-        public const int taille = 9;
-        public const int taille_block = 3;
-        static Random rnd = new Random(0);
-        //int maxrestarts = 20;
-        // int maxepochs = 5000;
-        //int numorganisms = 200;
-
-        public enum OrganismType
-
-        public const int taille = 9;
-        public const int taille_block = 3;
-        static Random rnd = new Random(0);
-        //int maxrestarts = 20;
-        // int maxepochs = 5000;
-        //int numorganisms = 200;
-
-        public enum OrganismType
-
-        public const int taille = 9;
-        public const int taille_block = 3;
-        static Random rnd = new Random(0);
-        //int maxrestarts = 20;
-        // int maxepochs = 5000;
-        //int numorganisms = 200;
-
-        public enum OrganismType
-
-        public const int taille = 9;
-        public const int taille_block = 3;
-        static Random rnd = new Random(0);
-        //int maxrestarts = 20;
-        // int maxepochs = 5000;
-        //int numorganisms = 200;
-
+     
+        //Differents type d'organisme
         public enum OrganismType
         {
             Worker,
             Explorer
         }
 
-        public class Organism //Cette classe Organism représente la particule de notre algorithme PSO
+        //class Organism comportant tous les élèments nécessaires qu'un organisme doit avoir
+        public class Organism
         {
-            public OrganismType Type { get; } //Il faut faire un getter pour accéder et/ou modifier ces 4 variables à gauche car leurs attributs sont privés
-            public int[,] Matrix { get; set; }
+            //Son type
+            public OrganismType Type { get; }
+            public int[,] Matrix { get; set; } 
             public int Error { get; set; }
             public int Age { get; set; }
 
-            public Organism(OrganismType type, int[,] m, int error, int age) //Constructeur par défaut de notre classe organisme 
-            {                                                                //Ce constructeur nous permettra d'initialiser l'instance de la classe Organisme
+            // constructeur
+            public Organism(OrganismType type, int[,] m, int error, int age)
+            {
                 Type = type;
                 Error = error;
                 Age = age;
@@ -82,64 +43,24 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
             }
         }
 
-        // private int Error(Sudoku soln)
-        // {
-        //return CountErrors(true) + CountErrors(false);
 
-        //int CountErrors(bool countByRow)
-        // {
-        // var errors = 0;
-        // for (var i = 0; i < PSOSolvers1.taille; ++i)
-        // {
-        //    var counts = new int[PSOSolvers1.taille];
-        //    for (var j = 0; j < PSOSolvers1.taille; ++j)
-        //    {
-        //       var cellValue = countByRow ? CellValues[i, j] : CellValues[j, i];
-        //       ++counts[cellValue - 1];
-        //  }
-
-        //  for (var k = 0; k < PSOSolvers1.taille; ++k)
-        //  {
-        //     if (counts[k] == 0)
-        //         ++errors;
-        // }
-        // }
-
-        // return errors;
-        // }
-        // }
-
-        //public Sudoku Solvette(Sudoku sudoku, int numOrganisms, int maxEpochs, int maxRestarts)
-        //{
-        // var error = int.MaxValue;
-        // GridSudoku bestSolution = null;
-        // var attempt = 0;
-        // while (error != 0 && attempt < maxRestarts)
-        // {
-        //  Console.WriteLine($"Attempt: {attempt}");
-        //  rnd = new Random(attempt);
-        //  bestSolution = SolveInternal(sudoku, numOrganisms, maxEpochs);
-        //  error = bestSolution.error;
-        //  ++attempt;
-        // }
-
-        // return bestSolution;
-        // }
-
-
-
-
+        // Fonction qui resout le sudoku prend en paramètres un Sudoku, le nombre d'organismes et le maximum de paramètres
         private Sudoku SolveInternal(Sudoku sudoku, int numOrganisms, int maxEpochs)
         {
+            //Déterminer le nombre d’objets organisme de travail comme 90 % du nombre total utilisé.
+            //Cette valeur a été déterminée par essais et erreurs
             var numberOfWorkers = (int)(numOrganisms * 0.90);
-            var hive = new Organism[numOrganisms];
+
+
+            var hive = new Organism[numOrganisms]; // creation du tableau ou l'on stock les organismes
 
             var bestError = int.MaxValue;
             Sudoku bestSolution = null;
 
-            for (var i = 0; i < numOrganisms; ++i) //en comm
+            for (var i = 0; i < numOrganisms; ++i) //boucle
             {
-                var organismType = i < numberOfWorkers
+                // Le type depend de la valeur de i 
+                var organismType = i < numberOfWorkers // s'il est inférieur 
                  ? OrganismType.Worker
                   : OrganismType.Explorer;
 
@@ -151,7 +72,7 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
                 if (err >= bestError) continue;
                 bestError = err;
                 bestSolution = Sudoku.New(randomSudoku);
-            } //jusqu'ici
+            } 
 
             var epoch = 0;
             while (epoch < maxEpochs)
@@ -171,6 +92,10 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
                         var neighborError = neighborSudoku.Error;
 
                         var p = rnd.NextDouble();
+
+                        //demande à un objet de l’organisme d’accepter une solution voisine moins bonne que la solution actuelle de l’objet.
+                        //stratégie d’optimisation courants conçue pour aider un algorithme réglés à partir d’une solution non optimal
+
                         if (neighborError < hive[i].Error || p < 0.001)
                         {
                             hive[i].Matrix = PSOSolvers1.DuplicateMatrix(neighbor);
@@ -204,7 +129,10 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
 
 
 
-                // merge best worker with best explorer into worst worker
+                // merge best worker with best explorer into worst worker           
+                //À chaque version de la boucle d’itération, chaque organisme de type Explorateur génère une grille de solution aléatoire.
+                //Une fois que chaque objet organisme a été traité, un nouvel organisme est alors créé
+
                 var bestWorkerIndex = 0;
                 var smallestWorkerError = hive[0].Error;
                 for (var i = 0; i < numberOfWorkers; ++i)
@@ -255,6 +183,10 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
         /// <param name="problem">int[][]</param>
         /// <param name="rand">pass in your random object if you got one</param>
         /// <returns></returns>
+        // merge best worker with best explorer into worst worker
+        //À chaque version de la boucle d’itération, chaque organisme de type Explorateur génère une grille de solution aléatoire.
+        //Une fois que chaque objet organisme a été traité, un nouvel organisme est alors créé
+
         public static int[,] RandomMatrix(Random rnd, int[,] problem)
         {
             var result = DuplicateMatrix(problem);
@@ -305,6 +237,12 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
 
         /// <param name="block">index of a 3x3 block</param>
         /// <returns>returns the (row,column) coordinate of the top-left cell</returns>
+        /// 
+
+        /// Un bloc de méthode accepte un index de ligne r et un index de colonne c et retourne un numéro de bloc (0-8) qui contient la cellule à (r, c).
+        /// Les numéros du bloc sont affectés de gauche à droite, puis de haut en bas. Par exemple, si (r, c) = (3, 8) méthode bloc retourne 5.
+        /// Angle de la méthode accepte un ID de bloc (0-8) et retourne l’index de l’angle supérieur gauche du bloc. Par exemple, si bloc = 8, la méthode renvoie la coin (6, 6).
+
         public static (int row, int column) Corner(int block)
         {
             int r = -1, c = -1;
@@ -352,11 +290,17 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
         }
 
 
+        //En raison de l’invariant grille secondaire 3 x 3, une solution voisine doit se limiter est une permutation d’une grille secondaire.
+        //l’algorithme sélectionne de manière aléatoire un bloc, puis sélectionne les deux cellules dans le bloc
+        //et échange les valeurs dans les deux cellules
+
         public static int[,] NeighborMatrix(Random rnd, int[,] problem, int[,] matrix)
         {
             // pick a random 3x3 block,
             // pick two random cells in block
             // swap values
+
+            /// Creates a copy of the provided matrix
             var result = DuplicateMatrix(matrix);
 
             var block = rnd.Next(0, taille); // [0,8]
@@ -413,14 +357,16 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
 
         /// Generates a matrix (grid, or array of arrays) representing the sudoku puzzle
 
-        /// <param name="rows">number of rows</param>
-        /// <param name="columns">number of columns per row</param>
-        /// <returns>an array of int[][]</returns>
         public static int[,] CreateMatrix(int m, int n)
         {
             var result = new int[m, n];
             return result;
         }
+
+        //accepte deux 9 x 9 matrices de deux objets organisme. La méthode d’analyse par blocs de 0 à 8
+        // Pour chaque bloc, une valeur aléatoire comprise entre 0,0 et 1,0 est générée.
+        //Si la valeur aléatoire est inférieur à 0,50 (c'est-à-dire environ la moitié du temps), puis les valeurs dans les deux blocs sont échangés. 
+
         public static int[,] MergeMatrices(Random rnd, int[,] m1, int[,] m2)
         {
             var result = DuplicateMatrix(m1);
@@ -465,90 +411,5 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
 
 }
 
-    //    public override Shared.GridSudoku Solve(Shared.GridSudoku s)
-    //    {
-
-    //        //using (Py.GIL())
-    //        //{
-    //        // create a Python scope
-    //        using (PyModule scope = Py.CreateScope())
-    //        {
-    //            // convert the Person object to a PyObject
-    //            PyObject pyCells = s.Cellules.ToPython();
-
-    //            // create a Python variable "person"
-    //            scope.Set("instance", pyCells);
-
-    //            // the person object may now be used in Python
-    //            string code = Resources.PSOSolvers1_py;
-    //            scope.Exec(code);
-    //            var result = scope.Get("r");
-    //            var managedResult = result.As<int[][]>();
-    //            //var convertesdResult = managedResult.Select(objList => objList.Select(o => (int)o).ToArray()).ToArray();
-    //            return new Shared.GridSudoku() { Cellules = managedResult };
-    //        }
-    //        //}
-
-    //    }
-
-    //    protected override void InitializePythonComponents()
-    //    {
-    //        //InstallPipModule("z3-solver"); A adapter au modèle PSO
-    //        base.InitializePythonComponents();
-    //    }
-
-
-
-    //}
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-    //public class PSOSolvers1 : PythonSolverBase
-    //{
-
-
-    //    public override Shared.GridSudoku Solve(Shared.GridSudoku s)
-    //    {
-
-    //        //using (Py.GIL())
-    //        //{
-    //        // create a Python scope
-    //        using (PyModule scope = Py.CreateScope())
-    //        {
-    //            // convert the Person object to a PyObject
-    //            PyObject pyCells = s.Cellules.ToPython();
-
-    //            // create a Python variable "person"
-    //            scope.Set("instance", pyCells);
-
-    //            // the person object may now be used in Python
-    //            string code = Resources.PSOSolvers1_py;
-    //            scope.Exec(code);
-    //            var result = scope.Get("r");
-    //            var managedResult = result.As<int[][]>();
-    //            //var convertesdResult = managedResult.Select(objList => objList.Select(o => (int)o).ToArray()).ToArray();
-    //            return new Shared.GridSudoku() { Cellules = managedResult };
-    //        }
-    //        //}
-
-    //    }
-
-    //    protected override void InitializePythonComponents()
-    //    {
-    //        //InstallPipModule("z3-solver"); A adapter au modèle PSO
-    //        base.InitializePythonComponents();
-    //    }
-    //}
 
 
