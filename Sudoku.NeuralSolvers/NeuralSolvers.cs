@@ -18,26 +18,31 @@ namespace Sudoku.NeuralSolvers
             //{
             // create a Python scope
             using (PyModule scope = Py.CreateScope())
-           {
-                // convert the Person object to a PyObject
+            {
+                //Transformation du sudoku en python
                 PyObject pySudoku = s.ToPython();
-                // create a Python variable "person"
+                //assignation à une variable pour le script
                 scope.Set("sudoku", pySudoku);
 
                 var modelPath = Path.Combine(Environment.CurrentDirectory, @"Resources\train_model_test2.h5");
+                //Transformation du chemin du modèle en python
                 PyObject pyModelPath = modelPath.ToPython();
+                //assignation à une variable pour le script
                 scope.Set("modelPath", pyModelPath);
 
-                // the person object may now be used in Python
-                string code = Resources.neuralnets_py;
+                //Execution du script
+                //string code = Resources.neuralnets_py;
+                string code = Resources.ModelLoad_py;
                 scope.Exec(code);
+                
+                //Récupération du sudoku résolu
                 var result = scope.Get("solvedSudoku");
                 var toReturn = result.As<Shared.GridSudoku>();
                 return toReturn;
             }
         }
 
-        
+
 
         protected override void InitializePythonComponents()
         {

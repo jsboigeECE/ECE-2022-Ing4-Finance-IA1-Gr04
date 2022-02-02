@@ -5,5 +5,5 @@
 
 
 from tensorflow.keras.models import load_model
-model = load_model('Resources\train_model_test2.h5')
+model = load_model(modelPath)
 

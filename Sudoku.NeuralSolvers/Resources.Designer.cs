@@ -64,17 +64,34 @@ namespace Sudoku.NeuralSolvers {
         ///   Recherche une chaîne localisée semblable à #!/usr/bin/env python
         ///# coding: utf-8
         ///
+        ///# In[ ]:
+        ///
+        ///
+        ///from tensorflow.keras.models import load_model
+        ///model = load_model(&apos;Resources\train_model_test2.h5&apos;)
+        ///
+        ///.
+        /// </summary>
+        internal static string ModelLoad_py {
+            get {
+                return ResourceManager.GetString("ModelLoad.py", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à #!/usr/bin/env python
+        ///# coding: utf-8
+        ///
         ///# # Neural nets as Sudoku solvers
         ///# 
         ///# Since the dataset was initially created for neural-nets, I focus on this approach. Obviously, there are other ways to solve Sudoku puzzle, some of them are way more intuitive than neural-nets. However, it was an opportunity to get a first hands-on with Keras framework !
         ///# 
         ///# I read the https://github.com/Kyubyong/sudoku to see if CNNs can crack Sudoku puzzles. 
-        ///# I was wondering if we could achieve similar results with a simpler n [le reste de la chaîne a été tronqué]&quot;;.
+        ///# I was wondering if we could achieve similar results with a s [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
-        internal static string neuralnets_py
-        {
+        internal static string neuralnets_py {
             get {
-                return ResourceManager.GetString("ModelLoad.py", resourceCulture);
+                return ResourceManager.GetString("neuralnets.py", resourceCulture);
             }
         }
     }
