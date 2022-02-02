@@ -64,10 +64,11 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
                  ? OrganismType.Worker
                   : OrganismType.Explorer;
 
-                var randomSudoku = Sudoku.New(PSOSolvers1.RandomMatrix(rnd, sudoku.CellValues));
+
+                var randomSudoku = Sudoku.New(PSOSolvers1.RandomMatrix(rnd, sudoku.CellValues)); //
                 var err = randomSudoku.Error;
 
-                hive[i] = new Organism(organismType, randomSudoku.CellValues, err, 0);
+                hive[i] = new Organism(organismType, randomSudoku.CellValues, err, 0); 
 
                 if (err >= bestError) continue;
                 bestError = err;
