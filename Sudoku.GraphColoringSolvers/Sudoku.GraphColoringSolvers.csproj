@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Form1.cs" />
+	  <Compile Remove="Form1.Designer.cs" />
+	  <Compile Remove="Program.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Remove="Form1.resx" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="QuikGraph" Version="2.3.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
+	</ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="QuikGraph, Version=2.3.0.0, Culture=neutral, PublicKeyToken=46bd58b0789759cb, processorArchitecture=MSIL">
+    </Reference>
+  </ItemGroup>
+  
+</Project>
