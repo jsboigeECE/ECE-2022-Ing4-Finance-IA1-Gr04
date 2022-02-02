@@ -7,4 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Sudoku.Shared\Sudoku.Shared.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="..\..\..\..\..\..\Volumes\BODRAIS128\ECE\ING4\S8\Intelligence Artificielle\TP\EmptyClass.cs" />
+  </ItemGroup>
 </Project>

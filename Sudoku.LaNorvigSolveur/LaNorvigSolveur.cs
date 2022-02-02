@@ -27,7 +27,7 @@ namespace Sudoku.LaNorvigSolveur
             {
                 for(int j = 0; j < 9; j++)
                 {
-                    s.Cellules[j][i] = Convert.ToInt32(lstval[compter]);
+                    s.Cellules[i][j] = Convert.ToInt32(lstval[compter]);
                     compter++;
                 }
             }         
