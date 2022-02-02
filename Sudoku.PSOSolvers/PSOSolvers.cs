@@ -138,8 +138,8 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
                 // merge best worker with best explorer into worst worker           
                 //À chaque version de la boucle d’itération, chaque organisme de type Explorateur génère une grille de solution aléatoire.
                 //Une fois que chaque objet organisme a été traité, un nouvel organisme est alors créé
-
-                var bestWorkerIndex = 0;
+                
+                var bestWorkerIndex = 0; //initialise à 0
                 var smallestWorkerError = hive[0].Error;
                 for (var i = 0; i < numberOfWorkers; ++i)
                 {
