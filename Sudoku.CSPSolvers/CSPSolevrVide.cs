@@ -30,14 +30,10 @@ namespace Sudoku.CSPSolvers
 
                     string code = Resources.MainGui_py;
                     scope.Exec(code);
-
-                    Console.WriteLine("On a executer le fichier MainGui_py!");
-
+                
                     var result = scope.Get("sudoku");
                     Console.WriteLine("Sudoku: " + result);
                     var toReturn = result.As<Shared.GridSudoku>();
-
-                    Console.WriteLine("resulat!");
                     return toReturn;
                 }
             }
