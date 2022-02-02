@@ -321,34 +321,28 @@ class Main:
         s = SudokuCSP(self.current_board)
         inf, dv, suv = None, None, None
 
-<<<<<<< HEAD
 
         # Pour que le bencmark fonctionne il faut commenter les lignes ci-dessous :
-        if inference == 1:
-=======
+        #if inference == 1:
         if inference == 0:
->>>>>>> 6622d4da0fb246d7b29c5d3a63571f768b0b3e2b
-            inf = no_inference
+             inf = no_inference
         elif inference == 1:
             inf = forward_checking
         elif inference == 2:
             inf = mac
 
 
-<<<<<<< HEAD
         # Pour que le bencmark fonctionne il faut decommenter la ligne ci-dessous :
         #inf = no_inference
 
 
         suv = mrv
-=======
-        suv = first_unassigned_variable
-        if useMRVHeuristics:
-            suv = mrv
-        odv = unordered_domain_values
-        if useLCVHeuristics:
-            odv = lcv
->>>>>>> 6622d4da0fb246d7b29c5d3a63571f768b0b3e2b
+        #suv = first_unassigned_variable
+        #if useMRVHeuristics:
+        #    suv = mrv
+        #odv = unordered_domain_values
+        #if useLCVHeuristics:
+        #    odv = lcv
 
         start = timer()
         a = backtracking_search(s, select_unassigned_variable=suv, order_domain_values=odv, inference=inf)
