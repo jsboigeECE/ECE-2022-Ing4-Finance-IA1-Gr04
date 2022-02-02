@@ -60,24 +60,28 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
             for (var i = 0; i < numOrganisms; ++i) //boucle
             {
                 // Le type depend de la valeur de i 
-                var organismType = i < numberOfWorkers // s'il est inférieur 
+                var organismType = i < numberOfWorkers // s'il est inférieur c'est un worker
                  ? OrganismType.Worker
-                  : OrganismType.Explorer;
+                  : OrganismType.Explorer; // sinon un exploreur 
+                
+                // On crée un sudoku avec des valeurs aléatoires
 
-
-                var randomSudoku = Sudoku.New(PSOSolvers1.RandomMatrix(rnd, sudoku.CellValues)); //
+                var randomSudoku = Sudoku.New(PSOSolvers1.RandomMatrix(rnd, sudoku.CellValues));
                 var err = randomSudoku.Error;
 
-                hive[i] = new Organism(organismType, randomSudoku.CellValues, err, 0); 
+                // on stocke l'oganisme
+                hive[i] = new Organism(organismType, randomSudoku.CellValues, err, 0);
 
                 if (err >= bestError) continue;
                 bestError = err;
                 bestSolution = Sudoku.New(randomSudoku);
             } 
 
-            var epoch = 0;
+            // nombre de tentatives autorisée pour que chaque particule se déplace
+            var epoch = 0; // inialisé à 0
             while (epoch < maxEpochs)
             {
+                // si le nombre de tentatives est très petit
                 if (epoch % 1000 == 0)
                     Console.WriteLine($"Epoch: {epoch}, Best error: {bestError}");
 
@@ -86,6 +90,7 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
 
                 for (var i = 0; i < numOrganisms; ++i)
                 {
+                    // si c'est un worker
                     if (hive[i].Type == OrganismType.Worker)
                     {
                         var neighbor = PSOSolvers1.NeighborMatrix(rnd, sudoku.CellValues, hive[i].Matrix);
