@@ -34,9 +34,12 @@ namespace Sudoku.NeuralSolvers
                 //string code = Resources.neuralnets_py;
                 string code = Resources.ModelLoad_py;
                 scope.Exec(code);
-                
+
+                //PyObject resultat = pyModelPath.ToPython();
+                //assignation à une variable pour le script
+                //scope.Set("resultat", pyModelPath);
                 //Récupération du sudoku résolu
-                var result = scope.Get("solvedSudoku");
+                var result = scope.Get("modelPath");
                 var toReturn = result.As<Shared.GridSudoku>();
                 return toReturn;
             }
