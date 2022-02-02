@@ -100,7 +100,6 @@ namespace Sudoku.Z3Solvers
         }
 
 
-
         BoolExpr GetPuzzleConstraint(Shared.GridSudoku instance)
         {
             BoolExpr instance_c = z3Context.MkTrue();
@@ -193,6 +192,7 @@ namespace Sudoku.Z3Solvers
                         substExprs.Add(X[i][j]);
                         substVals.Add(z3Context.MkInt(instance.Cellules[i][j]));
                     }
+      
             BoolExpr instance_c = (BoolExpr)GenericContraints.Substitute(substExprs.ToArray(), substVals.ToArray());
 
             var z3Solver = GetSolver();
