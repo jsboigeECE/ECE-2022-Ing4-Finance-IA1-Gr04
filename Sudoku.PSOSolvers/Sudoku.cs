@@ -25,24 +25,24 @@ namespace Sudoku.PSOSolvers
         {
             get
             {
-                return CountErrors(true) + CountErrors(false);
-
-                int CountErrors(bool countByRow)
-                {
-                    var errors = 0;
-                    for (var i = 0; i < PSOSolvers1.taille; ++i)
-                    {
-                        var counts = new int[PSOSolvers1.taille];
-                        for (var j = 0; j < PSOSolvers1.taille; ++j)
-                        {
-                            var cellValue = countByRow ? CellValues[i, j] : CellValues[j, i];
-                            ++counts[cellValue - 1];
+                return CountErrors(true) + CountErrors(false); //On compte le nombre d'erreurs en fonction des valeurs booléennes true ou false (
+                                                                //True permet le comptage par ligne et false par colonne 
+                int CountErrors(bool countByRow) //fonction pour compter les erreurs en fonction de la valeur du bool reçu en paramètres
+                {                                                                  //Les erreurs peuvent être soit des cases vides, soit des doublons 
+                    var errors = 0; //Initialisation du compteur d'erreurs à 0
+                    for (var i = 0; i < PSOSolvers1.taille; ++i) //On commence à parcourir la totalité de la grille (ligne par ligne ou colonne par colonne)
+                    { 
+                        var counts = new int[PSOSolvers1.taille]; //On initialise un compteur d'occurrences pour chaque valeur de la ligne ou de la colonne 
+                        for (var j = 0; j < PSOSolvers1.taille; ++j) //On commence à parcourir toute la ligne ou toute la colonne
+                        {   
+                            var cellValue = countByRow ? CellValues[i, j] : CellValues[j, i]; // cellValue = CellValues[i, j] si countByRow = true. Sinon, cellValue = CellValues[j, i]
+                            ++counts[cellValue - 1]; //On remplit le tableau counts pour qu'il stocke le nombre de fois que CHAQUE valeur de la ligne se répète
                         }
 
                         for (var k = 0; k < PSOSolvers1.taille; ++k) //On refait un nouveau comptage pour voir quelles sont les valeurs manquantes par ligne ou par cellule
                         {
-                            if (counts[k] == 0)
-                                ++errors;
+                            if (counts[k] == 0) //Si au cours du comptage il y a une valeur qui n'apparaît pas, alors le compteur d'erreurs s'incrémente
+                                ++errors; 
                         }
                     }
 
