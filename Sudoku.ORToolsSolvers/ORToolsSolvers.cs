@@ -3,6 +3,7 @@ using Sudoku.Shared;
 using System.Collections.Generic;
 using System.Linq;
 using Google.OrTools.ConstraintSolver;
+using Google.OrTools.LinearSolver;
 
 
 namespace Sudoku.ORToolsSolvers
@@ -14,7 +15,7 @@ namespace Sudoku.ORToolsSolvers
         public Shared.GridSudoku Solve(Shared.GridSudoku s1)
         {
 
-            Solver solver = new Solver("Sudoku");
+            Google.OrTools.ConstraintSolver.Solver solver = new Google.OrTools.ConstraintSolver.Solver("Sudoku");
 
 
             int cell_size = 3;
@@ -67,8 +68,8 @@ namespace Sudoku.ORToolsSolvers
 
 
             DecisionBuilder db = solver.MakePhase(grid_flat,
-                                                  Solver.INT_VAR_SIMPLE,
-                                                  Solver.INT_VALUE_SIMPLE);
+                                                  Google.OrTools.ConstraintSolver.Solver.INT_VAR_SIMPLE,
+                                                  Google.OrTools.ConstraintSolver.Solver.INT_VALUE_SIMPLE);
 
             solver.NewSearch(db);
 
@@ -107,8 +108,26 @@ namespace Sudoku.ORToolsSolvers
 
     public class ORToolsIntegerOptimizationSolver : ISolverSudoku
     {
+
         public Shared.GridSudoku Solve(Shared.GridSudoku s2)
         {
+
+            Google.OrTools.LinearSolver.Solver solver = Google.OrTools.LinearSolver.Solver.CreateSolver("Sudoku");
+
+
+            int cell_size = 3;
+            IEnumerable<int> CELL = Enumerable.Range(0, cell_size);
+            int n = cell_size * cell_size;
+            IEnumerable<int> RANGE = Enumerable.Range(0, n);
+
+
+            int[][] grille = s2.Cellules;
+
+            int[,] initial_grid = grille.To2D();
+
+
+
+
 
             return s2;
 
