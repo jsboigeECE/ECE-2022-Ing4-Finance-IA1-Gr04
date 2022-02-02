@@ -44,7 +44,7 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
         }
 
 
-        // Fonction qui resout le sudoku prend en paramètres un Sudoku, le nombre d'organismes et le maximum de paramètres
+        // Fonction qui resout le sudoku prend en paramètres un Sudoku, le nombre d'organismes et les tentatives maximales de déplacement
         private Sudoku SolveInternal(Sudoku sudoku, int numOrganisms, int maxEpochs)
         {
             //Déterminer le nombre d’objets organisme de travail comme 90 % du nombre total utilisé.
@@ -57,9 +57,9 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
             var bestError = int.MaxValue; 
             Sudoku bestSolution = null; 
 
-            for (var i = 0; i < numOrganisms; ++i) //boucle
+            for (var i = 0; i < numOrganisms; ++i) //boucle qui parcourt chaquee organisme 
             {
-                // Le type depend de la valeur de i 
+                // Le type d'organisme depend de la valeur de i 
                 var organismType = i < numberOfWorkers // s'il est inférieur c'est un worker
                  ? OrganismType.Worker
                   : OrganismType.Explorer; // sinon un exploreur 
@@ -67,14 +67,14 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
                 // On crée un sudoku avec des valeurs aléatoires
 
                 var randomSudoku = Sudoku.New(PSOSolvers1.RandomMatrix(rnd, sudoku.CellValues));
-                var err = randomSudoku.Error;
+                var err = randomSudoku.Error;   //Initialisation de l'erreur à un nombre aléatoire
 
-                // on stocke l'oganisme
+                // on initialise chaque organisme dans un tableau appelé hive (l'équivalent de notre Swarm dans le PSO) 
                 hive[i] = new Organism(organismType, randomSudoku.CellValues, err, 0);
 
-                if (err >= bestError) continue;
-                bestError = err;
-                bestSolution = Sudoku.New(randomSudoku);
+                if (err >= bestError) continue; //Si l'erreur aléatoire est meilleure que l'erreur initiale, la meilleure erreur prendra cette nouvelle valeur
+                bestError = err;                   //La meilleure solution sera un nouveau Sudoku contenant la meilleure Erreur
+                bestSolution = Sudoku.New(randomSudoku); //On arrête la boucle for une fois qu'une nouvelle grille est formée contenant la meilleure erreur
             } 
 
             // nombre de tentatives autorisée pour que chaque particule se déplace
@@ -85,10 +85,10 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
                 if (epoch % 1000 == 0)
                     Console.WriteLine($"Epoch: {epoch}, Best error: {bestError}");
 
-                if (bestError == 0)
+                if (bestError == 0) //Si le bestError est nul, la boucle while s'arrête automatiquement 
                     break;
 
-                for (var i = 0; i < numOrganisms; ++i)
+                for (var i = 0; i < numOrganisms; ++i) //On parcours le tableau hive contenant chaque organisme 
                 {
                     // si c'est un worker
                     if (hive[i].Type == OrganismType.Worker)
@@ -97,12 +97,12 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
                         var neighborSudoku = Sudoku.New(neighbor);
                         var neighborError = neighborSudoku.Error;
 
-                        var p = rnd.NextDouble();
+                        var p = rnd.NextDouble(); //Cette commande nous permet de générer une séquence de réels aléatoires à chaque tour de boucle
 
                         //demande à un objet de l’organisme d’accepter une solution voisine moins bonne que la solution actuelle de l’objet.
                         //stratégie d’optimisation courants conçue pour aider un algorithme réglés à partir d’une solution non optimal
 
-                        if (neighborError < hive[i].Error || p < 0.001)
+                        if (neighborError < hive[i].Error || p < 0.001) 
                         {
                             hive[i].Matrix = PSOSolvers1.DuplicateMatrix(neighbor);
                             hive[i].Error = neighborError;
@@ -131,9 +131,6 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
                         bestSolution = randomSudoku;
                     }
                 }
-
-
-
 
                 // merge best worker with best explorer into worst worker           
                 //À chaque version de la boucle d’itération, chaque organisme de type Explorateur génère une grille de solution aléatoire.
@@ -271,7 +268,7 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
         }
 
 
-        public static int Block(int r, int c)
+        public static int Block(int r, int c) //Fonction qui retourne l'indice d'une sous matrice 3*3
         {
             if (r >= 0 && r <= 2 && c >= 0 && c <= 2)
                 return 0;
@@ -392,7 +389,7 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
 
         public GridSudoku Solve(GridSudoku s)
         {
-            var converted = s.Cellules.To2D();
+            var converted = s.Cellules.To2D(); //Il faut convertir la grille que le solveur reçoit pour que la fonction SolveInternal le manipule facilement 
             var sudoku = Sudoku.New(converted);
 
             Sudoku solvedSudoku ;
