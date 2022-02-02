@@ -54,8 +54,8 @@ namespace Sudoku.PSOSolvers  //Ceci est un test
 
             var hive = new Organism[numOrganisms]; // creation du tableau ou l'on stock les organismes
 
-            var bestError = int.MaxValue;
-            Sudoku bestSolution = null;
+            var bestError = int.MaxValue; 
+            Sudoku bestSolution = null; 
 
             for (var i = 0; i < numOrganisms; ++i) //boucle
             {
