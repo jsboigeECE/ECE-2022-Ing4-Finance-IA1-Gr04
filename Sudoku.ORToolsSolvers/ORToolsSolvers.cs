@@ -18,7 +18,7 @@ namespace Sudoku.ORToolsSolvers
             // Declaration of the solver
             Google.OrTools.ConstraintSolver.Solver solver = new Google.OrTools.ConstraintSolver.Solver("Sudoku");
 
-            
+            // Definition of the variables
             int cell_size = 3;
             IEnumerable<int> CELL = Enumerable.Range(0, cell_size);
             int n = cell_size * cell_size;
@@ -95,16 +95,16 @@ namespace Sudoku.ORToolsSolvers
     }
 
 
-
+    // 2nd solver : Integer Optimzation Solver
     public class ORToolsIntegerOptimizationSolver : ISolverSudoku
     {
 
         public Shared.GridSudoku Solve(Shared.GridSudoku s)
         {
-
+            // Declaration of the solver
             Google.OrTools.LinearSolver.Solver solver = Google.OrTools.LinearSolver.Solver.CreateSolver("Sudoku");
 
-
+            // Definition of the variables
             int cell_size = 3;
             IEnumerable<int> CELL = Enumerable.Range(0, cell_size);
             int n = cell_size * cell_size;
@@ -135,6 +135,17 @@ namespace Sudoku.ORToolsSolvers
             {
                 
             }
+
+
+            // Definition of the objective
+
+
+            // Call the solver
+            Google.OrTools.LinearSolver.Solver.ResultStatus resultStatus = solver.Solve();
+
+
+            // Print the solution
+
 
 
             return s;
