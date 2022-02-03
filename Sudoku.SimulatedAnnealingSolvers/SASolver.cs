@@ -25,7 +25,7 @@ namespace Sudoku.SimulatedAnnealingSolvers
                 // the person object may now be used in Python
                 string code = Resources.SASSolvers1_py;
                 scope.Exec(code);
-                var result = scope.Get("r");
+                var result = scope.Get("solution");
                 var managedResult = result.As<int[][]>();
                 //var convertesdResult = managedResult.Select(objList => objList.Select(o => (int)o).ToArray()).ToArray();
                 return new Shared.GridSudoku() { Cellules = managedResult };
