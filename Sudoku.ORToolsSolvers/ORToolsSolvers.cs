@@ -116,7 +116,6 @@ namespace Sudoku.ORToolsSolvers
             int[,] initial_grid = grille.To2D();
 
 
-            /*
             Variable[,] grid = solver.MakeIntVarMatrix(n, n, 1, 9, "grid");
             IntVar[] grid_flat = grid.Flatten();
 
@@ -130,7 +129,13 @@ namespace Sudoku.ORToolsSolvers
                     }
                 }
             }
-            */
+
+            // Definition of the constraints
+            foreach (int i in RANGE)
+            {
+                
+            }
+
 
             return s;
 
