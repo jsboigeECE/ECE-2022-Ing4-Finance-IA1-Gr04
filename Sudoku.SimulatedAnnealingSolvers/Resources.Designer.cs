@@ -53,5 +53,6 @@ namespace Sudoku.SimulatedAnnealingSolvers {
                 return ResourceManager.GetString("SASSolvers1.py", resourceCulture);
             }
         }
+
     }
 }
