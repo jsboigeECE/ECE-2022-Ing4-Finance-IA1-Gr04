@@ -12,7 +12,8 @@ namespace SudokuSolver
         private int _row;
         private int _column;
         private int? _value;
-
+        private int save_row;
+        private int save_column;
         #endregion
 
         #region Constructors
@@ -28,6 +29,8 @@ namespace SudokuSolver
             Row = row;
             Column = column;
             Value = value;
+            SaveRow = row;
+            SaveColumn = column;
         }
 
         /// <summary>
@@ -68,6 +71,29 @@ namespace SudokuSolver
                     throw new ArgumentOutOfRangeException("value", "The column must be between 1 and 9");
 
                 _column  = value;
+            }
+        }
+        public int SaveRow
+        {
+            get { return save_row; }
+            set
+            {
+                if (value < 1 || value > 9)
+                    throw new ArgumentOutOfRangeException("value", "The row value must be between 1 and 9");
+
+                save_row = value;
+            }
+        }
+
+        public int SaveColumn
+        {
+            get { return save_row; }
+            set
+            {
+                if (value < 1 || value > 9)
+                    throw new ArgumentOutOfRangeException("value", "The row value must be between 1 and 9");
+
+                save_column = value;
             }
         }
 

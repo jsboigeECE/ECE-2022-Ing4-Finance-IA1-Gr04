@@ -30,7 +30,7 @@ namespace SudokuSolver
         /// <typeparam name="T">The type of data stored in the graph's nodes.</typeparam>
         /// <param name="graph">The graph to be coloring.</param>
         /// <returns>One possible coloring of the graph.</returns>
-        public static IList<GraphColoringResult<T>> Color<T>(this Graph<T> graph) where T : IEquatable<T>
+        public static IList<GraphColoringResult<T>> Color<T>(this Graph<T> graph,int startingindex) where T : IEquatable<T>
          {
              IList<GraphColoringResult<T>> nodeSet = new List<GraphColoringResult<T>>();
 
@@ -38,12 +38,13 @@ namespace SudokuSolver
 
              int numberOfColoredNodes = 0;
 
-             while (numberOfColoredNodes < graph.Count)
+
+            while (numberOfColoredNodes < graph.Count)
              {
                  var max = -1;
                  var index = -1;
 
-                 for (int i = 0; i < graph.Count; i++)
+                for (int i = startingindex; i < graph.Count; i++)
                  {
                      if (!Colored(graph.Nodes[i], nodeSet))
                      {
@@ -63,6 +64,27 @@ namespace SudokuSolver
                          }
                      }
                  }
+
+                for (int j = 0; j < startingindex; j++)
+                {
+                    if (!Colored(graph.Nodes[j], nodeSet))
+                    {
+                        var d = SaturatedDegree(graph.Nodes[j], nodeSet);
+                        if (d > max)
+                        {
+                            max = d;
+                            index = j;
+                        }
+
+                        else if (d == max)
+                        {
+                            if (Degree(graph.Nodes[j]) > Degree(graph.Nodes[index]))
+                            {
+                                index = j;
+                            }
+                        }
+                    }
+                }
 
                 AssignColor(graph.Nodes[index], nodeSet,ref colorNumber);
                 numberOfColoredNodes++;
