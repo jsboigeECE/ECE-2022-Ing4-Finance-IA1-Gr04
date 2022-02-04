@@ -9,22 +9,23 @@ using Google.OrTools.LinearSolver;
 namespace Sudoku.ORToolsSolvers
 {
 
+    // 1st solver : Constraint Solver
     public class ORToolsConstraintSolver : ISolverSudoku
     {
 
-        public Shared.GridSudoku Solve(Shared.GridSudoku s1)
+        public Shared.GridSudoku Solve(Shared.GridSudoku s)
         {
-
+            // Declaration of the solver
             Google.OrTools.ConstraintSolver.Solver solver = new Google.OrTools.ConstraintSolver.Solver("Sudoku");
 
-
+            // Definition of the variables
             int cell_size = 3;
             IEnumerable<int> CELL = Enumerable.Range(0, cell_size);
             int n = cell_size * cell_size;
             IEnumerable<int> RANGE = Enumerable.Range(0, n);
 
 
-            int[][] grille = s1.Cellules;
+            int[][] grille = s.Cellules;
 
             int[,] initial_grid = grille.To2D();
 
@@ -41,9 +42,10 @@ namespace Sudoku.ORToolsSolvers
                     }
                 }
             }
+
+            // Create the constraint
             foreach (int i in RANGE)
             {
-
                 // rows
                 solver.Add((from j in RANGE
                             select grid[i, j]).ToArray().AllDifferent());
@@ -51,7 +53,6 @@ namespace Sudoku.ORToolsSolvers
                 // cols
                 solver.Add((from j in RANGE
                             select grid[j, i]).ToArray().AllDifferent());
-
             }
 
             // cells
@@ -66,11 +67,12 @@ namespace Sudoku.ORToolsSolvers
                 }
             }
 
-
+            // Call the solver
             DecisionBuilder db = solver.MakePhase(grid_flat,
                                                   Google.OrTools.ConstraintSolver.Solver.INT_VAR_SIMPLE,
                                                   Google.OrTools.ConstraintSolver.Solver.INT_VALUE_SIMPLE);
 
+            // Print the solution
             solver.NewSearch(db);
 
             while (solver.NextSolution())
@@ -79,57 +81,74 @@ namespace Sudoku.ORToolsSolvers
                 {
                     for (int j = 0; j < n; j++)
                     {
-                        //Console.Write("{0} ", grid[i, j].Value());
-                        s1.Cellules[i][j] = (int)grid[i, j].Value();
+                        s.Cellules[i][j] = (int)grid[i, j].Value();
                     }
-                    //Console.WriteLine();
+
                 }
 
-                //Console.WriteLine();
             }
-
-            //Console.WriteLine("\nSolutions: {0}", solver.Solutions());
-            //Console.WriteLine("WallTime: {0}ms", solver.WallTime());
-            //Console.WriteLine("Failures: {0}", solver.Failures());
-            //Console.WriteLine("Branches: {0} ", solver.Branches());
-
-            //s.Cellules = grid.ToJaggedArray().Select(varrow => varrow.Select(varcells => (int)varcells.Value()).ToArray()).ToArray();
-            //solver.EndSearch();
-             
-
-
-            return s1;
+           
+            return s;
 
         }
 
     }
 
 
-
+    // 2nd solver : Integer Optimzation Solver
     public class ORToolsIntegerOptimizationSolver : ISolverSudoku
     {
 
-        public Shared.GridSudoku Solve(Shared.GridSudoku s2)
+        public Shared.GridSudoku Solve(Shared.GridSudoku s)
         {
-
+            // Declaration of the solver
             Google.OrTools.LinearSolver.Solver solver = Google.OrTools.LinearSolver.Solver.CreateSolver("Sudoku");
 
-
+            // Definition of the variables
             int cell_size = 3;
             IEnumerable<int> CELL = Enumerable.Range(0, cell_size);
             int n = cell_size * cell_size;
             IEnumerable<int> RANGE = Enumerable.Range(0, n);
 
 
-            int[][] grille = s2.Cellules;
+            int[][] grille = s.Cellules;
 
             int[,] initial_grid = grille.To2D();
 
 
+            Variable[,] grid = solver.MakeIntVarMatrix(n, n, 1, 9, "grid");
+            IntVar[] grid_flat = grid.Flatten();
+
+            foreach (int i in RANGE)
+            {
+                foreach (int j in RANGE)
+                {
+                    if (initial_grid[i, j] > 0)
+                    {
+                        solver.Add(grid[i, j] == initial_grid[i, j]);
+                    }
+                }
+            }
+
+            // Definition of the constraints
+            foreach (int i in RANGE)
+            {
+                
+            }
+
+
+            // Definition of the objective
+
+
+            // Call the solver
+            Google.OrTools.LinearSolver.Solver.ResultStatus resultStatus = solver.Solve();
+
+
+            // Print the solution
 
 
 
-            return s2;
+            return s;
 
         }
 
