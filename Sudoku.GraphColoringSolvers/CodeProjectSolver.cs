@@ -1,5 +1,6 @@
 ﻿using Sudoku.Shared;
 using SudokuSolver;
+using System;
 
 namespace Sudoku.GraphColoringSolvers.GraphColoringSolvers
 {
@@ -17,12 +18,13 @@ namespace Sudoku.GraphColoringSolvers.GraphColoringSolvers
                 for (int colIndex = 0; colIndex < 9; colIndex++)
                 {
                     var cellValue = s.Cellules[rowIndex][colIndex];
-                    if (cellValue!=0)
+                    if (cellValue != 0)
                     {
-                        puzzle[rowIndex+1, colIndex+1] = cellValue;
+                        puzzle[rowIndex + 1, colIndex + 1] = cellValue;
                     }
                 }
             }
+
 
             if (puzzle.Solve())
             {
@@ -30,13 +32,16 @@ namespace Sudoku.GraphColoringSolvers.GraphColoringSolvers
                 {
                     for (int colIndex = 0; colIndex < 9; colIndex++)
                     {
-                        s.Cellules[rowIndex][colIndex] = puzzle[rowIndex+1, colIndex+1]??0;
+                        s.Cellules[rowIndex][colIndex] = puzzle[rowIndex + 1, colIndex + 1] ?? 0;
                     }
                 }
-
-               
             }
+               
+            
             return s;
         }
+
+       
+
     }
 }
