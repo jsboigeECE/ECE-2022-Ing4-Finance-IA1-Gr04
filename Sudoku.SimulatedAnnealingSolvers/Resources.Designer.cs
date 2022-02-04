@@ -46,13 +46,23 @@ namespace Sudoku.SimulatedAnnealingSolvers {
                 resourceCulture = value;
             }
         }
-        internal static string SASSolvers1_py
-        {
-            get
-            {
+        
+        internal static string SASSolvers1_py {
+            get {
                 return ResourceManager.GetString("SASSolvers1.py", resourceCulture);
             }
         }
-
+        
+        internal static string SASolvers2_py {
+            get {
+                return ResourceManager.GetString("SASolvers2.py", resourceCulture);
+            }
+        }
+        
+        internal static string SASolvers3_py {
+            get {
+                return ResourceManager.GetString("SASolvers3.py", resourceCulture);
+            }
+        }
     }
 }
