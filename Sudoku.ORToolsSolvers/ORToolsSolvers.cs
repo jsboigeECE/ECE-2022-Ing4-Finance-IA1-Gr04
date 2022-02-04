@@ -117,7 +117,7 @@ namespace Sudoku.ORToolsSolvers
 
 
             Variable[,] grid = solver.MakeIntVarMatrix(n, n, 1, 9, "grid");
-            IntVar[] grid_flat = grid.Flatten();
+            //IntVar[] grid_flat = grid.Flatten();
 
             foreach (int i in RANGE)
             {
