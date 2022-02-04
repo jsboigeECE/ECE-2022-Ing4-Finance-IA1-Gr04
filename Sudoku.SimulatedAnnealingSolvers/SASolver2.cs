@@ -4,7 +4,7 @@ using Sudoku.Shared;
 
 namespace Sudoku.SimulatedAnnealingSolvers
 {
-    public class SolversSimulatedAnnealing1 : PythonSolverBase
+    public class SolversSimulatedAnnealing3 : PythonSolverBase
     {
 
 
@@ -23,7 +23,7 @@ namespace Sudoku.SimulatedAnnealingSolvers
                 scope.Set("instance", pyCells);
 
                 // the person object may now be used in Python
-                string code = Resources.SASSolvers1_py;
+                string code = Resources.SASolvers3_py;
                 scope.Exec(code);
                 var result = scope.Get("solution");
                 var managedResult = result.As<int[][]>();
@@ -37,6 +37,7 @@ namespace Sudoku.SimulatedAnnealingSolvers
         protected override void InitializePythonComponents()
         {
             InstallPipModule("numpy");
+            InstallPipModule("simanneal");
             base.InitializePythonComponents();
         }
 
